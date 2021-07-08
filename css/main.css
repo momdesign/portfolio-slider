@@ -18,16 +18,24 @@
   min-width: 100vw;
   height: 60vh;
   position: absolute;
-  background-color: white;
+  /*background-color: white;*/
   left: 0;
-  transition: left, transform 1s ease;
+  /*transition: left, transform 4s ease;*/
   z-index: 0;
+}
+
+.slide.top {
+  /*transition: none;*/
+}
+
+.slide.top.active {
+  /*transition: left, transform 4s ease;*/
 }
 
 .slide img{
   max-height: 60vh;
   position: absolute;
-  transition:  transform 1s ease;
+  /*transition:  transform 4s ease;*/
 }
 
 
