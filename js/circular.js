@@ -2,21 +2,26 @@ import VirtualScroll from 'virtual-scroll';
 const scroller = new VirtualScroll();
 
 const items = document.querySelectorAll('.item');
+const itemWrappers = document.querySelectorAll('.item-wrapper');
 const radius = document.querySelector('.circle-mock').offsetHeight / 2;
 const radians = 2 * Math.PI / items.length;
 
 let prevY;
 
-const positionItems = (x, y) => {
-  const easedY = lerp(prevY / 6, y / 6, 0.001);
-
-  items.forEach((item, i) => {
-    const realY = i % 2 === 0 ? easedY : y / 6;
+const positionWrappers = () => {
+  itemWrappers.forEach((wr, i) => {
     const alpha = Math.PI - (i * radians);
 
-    item.style.color = i % 2 ? 'red' : 'green';
+    wr.style.top = `${radius * Math.sin(0 / 360 + alpha)}px`;
+    wr.style.left = `${radius * Math.cos(0 / 360 + alpha)}px`;
+  });
+};
 
-    item.style.transform = `translate(${radius * Math.sin(-realY / 360 + alpha)}px, ${radius * Math.cos(-realY / 360 + alpha)}px)`;
+const positionItems = (x, y) => {
+  items.forEach((wr, i) => {
+    const alpha = Math.PI - (i * radians);
+
+    wr.style.transform = `translate(${radius * Math.sin(-y / 360)}px, ${radius * Math.cos(-y / 360)}px)`;
   });
 };
 
@@ -33,10 +38,11 @@ const positionLinearEls = y => {
 
 scroller.on(e => {
   positionItems(e.x, e.y);
-  positionLinearEls(e.y);
+  // positionLinearEls(e.y);
 });
 
 positionItems(0, 0);
+positionWrappers();
 
 function lerp(a, b, n) {
   return (1 - n) * a + n * b;
