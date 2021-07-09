@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.css"],"names":[],"mappings":"AACA,OACE,iBAAkB,CAClB,YACF,CACA,kBACE,iBAAkB,CAClB,UAAW,CACX,QACF","file":"main.fbf2279e.css","sourceRoot":"..","sourcesContent":["\n.intro {\n  position: relative;\n  height: 100vh;\n}\n.buttons--wrapper {\n  position: absolute;\n  bottom: 20%;\n  left: 45%\n}\n"]}
