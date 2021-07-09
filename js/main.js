@@ -6,27 +6,35 @@ const slider = document.querySelector('.slider');
 const getNextPrev = () => {
   const activeSlide = document.querySelector('.slide.active');
   const activeIdx = slides.indexOf(activeSlide);
-  let next, prev;
+  let next, prev, nextAfterNext;
 
   if (activeIdx === slides.length - 1) {
     next = slides[0];
   } else {
     next = slides[activeIdx + 1];
   }
+  if(activeIdx === slides.length - 2){
+    nextAfterNext = slides[0];
+  } else {
+    if(activeIdx === slides.length - 1){
+      nextAfterNext = slides[1];
+    } else {
+      nextAfterNext = slides[activeIdx + 2];
+    }
+  }
+
   if (activeIdx === 0) {
     prev = slides[slides.length - 1];
   } else {
     prev = slides[activeIdx - 1];
   }
-  return [next, prev];
+  return [next, prev, nextAfterNext];
 };
 
 const setInitialSliderPosition = () => {
   const activeSlide = document.querySelector('.slide.active');
   const activeIdx = slides.indexOf(activeSlide);
   const [next, prev] = getNextPrev();
-  activeSlide.classList.remove('active');
-  next.classList.add('active');
 
   slides.forEach((s, i) => {
     if (i === activeIdx) {
@@ -49,58 +57,71 @@ const setInitialSliderPosition = () => {
 
 setTimeout( setInitialSliderPosition, 0);
 
-const goToNextSlide = () => {
+function goToNextSlide() {
   const activeSlide = document.querySelector('.slide.active');
-  const [next, prev] = getNextPrev();
+  const [next, prev, nextAfterNext] = getNextPrev();
   const activeIdx = slides.indexOf(activeSlide);
+
+  slides.forEach((s, i ) => {
+    if (i === activeIdx) {
+          gsap.to(s,  {xPercent: -100, duration: 0.7, ease: 'ease'});
+      } else {
+      if (s === next) {
+        gsap.to(s, { xPercent: 0, duration: 0.7, ease: 'ease' });
+        gsap.to(s.children[0],  { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
+      } else {
+       if(s === nextAfterNext) {
+         gsap.to(s,  { xPercent: 95, duration: 0.7, ease: 'ease' });
+       } else {
+         gsap.set(s, { xPercent: 100 });
+         gsap.set(s.children[0], { xPercent: 0});
+       }
+      }
+    }
+  });
   activeSlide.classList.remove('active');
   next.classList.add('active');
-
-  slides.forEach((s, i) => {
-    if (i === activeIdx) {
-      gsap.fromTo(s, { xPercent: 95 }, {xPercent: 0});
-      gsap.fromTo(s.children[0], {xPercent: 0},{ xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
-    } else {
-      if (s === prev) {
-        gsap.fromTo(s, { xPercent: 0 }, { xPercent: -100 });
-      } else {
-        if (s === next) {
-          gsap.fromTo(s, {xPercent: 100}, { xPercent: 95 });
-          gsap.fromTo(s.children[0], { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  }, {xPercent: 0});
-        } else {
-          gsap.set(s, { xPercent: 100 });
-          gsap.set(s.children[0], { xPercent: 0});
-        }
-      }
-    }
-  });
 };
 
-const goToPrevSlide = () => {
+slides.forEach((s, i ) => {
+  s.addEventListener('click', () => onSlideClick(i));
+});
+
+const onSlideClick = i => {
+  const activeSlide = document.querySelector('.slide.active');
+  const activeIdx = slides.indexOf(activeSlide);
+
+  const [next, prev, nextAfterNext] = getNextPrev();
+  if (activeIdx + 1 === i) {
+    goToNextSlide();
+  }
+};
+
+function goToPrevSlide() {
   const activeSlide = document.querySelector('.slide.active');
   const [next, prev] = getNextPrev();
   const activeIdx = slides.indexOf(activeSlide);
+
+ slides.forEach((s, i) => {
+   if (i === activeIdx) {
+     gsap.to(s,  {xPercent: 95, duration: 0.7, ease: 'ease'});
+     gsap.to(s.children[0], {xPercent: 0});
+   } else {
+     if(s === prev) {
+       gsap.fromTo(s,  {xPercent: -100 }, { xPercent: 0, duration: 0.7, ease: 'ease' });
+       gsap.to(s.children[0], { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
+     } else {
+       if (s === next) {
+         gsap.to(s,  { xPercent: 100, duration: 0.7, ease: 'ease' });
+       } else {
+         gsap.set(s, { xPercent: 100 });
+         gsap.set(s.children[0], { xPercent: 0});
+       }
+     }
+   }
+ });
   activeSlide.classList.remove('active');
   prev.classList.add('active');
-
-  slides.forEach((s, i) => {
-    if (i === activeIdx) {
-      gsap.fromTo(s, { xPercent: -100 }, {xPercent: 0});
-      gsap.fromTo(s.children[0], {xPercent: 0},{ xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
-    } else {
-      if (s === prev) {
-        gsap.fromTo(s, { xPercent: -100 }, { xPercent: -100 });
-      } else {
-        if (s === next) {
-          gsap.fromTo(s, {xPercent: 0}, { xPercent: 95 });
-          gsap.fromTo(s.children[0], { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  }, {xPercent: 0});
-        } else {
-          gsap.set(s, { xPercent: 100 });
-          gsap.set(s.children[0], { xPercent: 0});
-        }
-      }
-    }
-  });
 };
 
 const throttleClickNext = throttle(() => {
@@ -121,3 +142,8 @@ nextBtn.addEventListener('click', () => {
 prevBtn.addEventListener('click', () => {
   throttleClickPrev();
 });
+
+window.addEventListener('keydown', e => {
+ if(e.key === 'ArrowLeft') throttleClickPrev();
+ if(e.key === 'ArrowRight') throttleClickNext();
+})

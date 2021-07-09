@@ -34,6 +34,7 @@ const positionLinearEls = y => {
   eased.style.transform = `translateX(${lerp(prevY / 8, y / 8, 0.0005)}px)`;
 
   prevY = y;
+
 }
 
 scroller.on(e => {

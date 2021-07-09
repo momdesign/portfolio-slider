@@ -2,17 +2,20 @@
   position: relative;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+
 }
 
 .buttons--wrapper {
   position: absolute;
-  bottom: 20%;
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .slider {
   position: relative;
+  margin-top: 15vh;
 }
 .slide {
   min-width: 100vw;
