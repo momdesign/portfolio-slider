@@ -1,5 +1,6 @@
-import throttle from './throttle';
 import gsap from 'gsap';
+
+import throttle from './throttle';
 
 const slides = Array.from(document.querySelectorAll('.slide'));
 const slider = document.querySelector('.slider');
@@ -71,7 +72,7 @@ function goToNextSlide() {
         gsap.to(s.children[0],  { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
       } else {
        if(s === nextAfterNext) {
-         gsap.to(s,  { xPercent: 95, duration: 0.7, ease: 'ease' });
+         gsap.to(s,  { xPercent: 95, duration: 0.7, ease: 'ease', delay: 0.2 });
        } else {
          gsap.set(s, { xPercent: 100 });
          gsap.set(s.children[0], { xPercent: 0});
@@ -84,15 +85,15 @@ function goToNextSlide() {
 };
 
 slides.forEach((s, i ) => {
-  s.addEventListener('click', () => onSlideClick(i));
+  s.addEventListener('click', () => onSlideClick(s, i));
 });
 
-const onSlideClick = i => {
+const onSlideClick = (s, i) => {
   const activeSlide = document.querySelector('.slide.active');
   const activeIdx = slides.indexOf(activeSlide);
 
   const [next, prev, nextAfterNext] = getNextPrev();
-  if (activeIdx + 1 === i) {
+  if (next === s || i ===  slides.length - 1) {
     goToNextSlide();
   }
 };
@@ -112,7 +113,7 @@ function goToPrevSlide() {
        gsap.to(s.children[0], { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
      } else {
        if (s === next) {
-         gsap.to(s,  { xPercent: 100, duration: 0.7, ease: 'ease' });
+         gsap.to(s,  { xPercent: 100, duration: 0.3, ease: 'ease' });
        } else {
          gsap.set(s, { xPercent: 100 });
          gsap.set(s.children[0], { xPercent: 0});
