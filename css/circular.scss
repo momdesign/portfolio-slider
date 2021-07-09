@@ -1,0 +1,66 @@
+$circle-radius: 80vw;
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  margin: 0;
+  background-color: #fff; // #eceadd;
+}
+
+.circular-wrapper {
+  position: absolute;
+  width: $circle-radius * 2;
+  height: $circle-radius * 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.circle-mock {
+  position: absolute;
+  width: $circle-radius * 2;
+  height: $circle-radius * 2;
+  margin: 0 auto;
+  top: 50%;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: $circle-radius;
+}
+
+.project-wrapper {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  transform: translateX(-50%);
+}
+
+.project {
+  width: 100%;
+  height: 100%;
+}
+
+.project-video,
+.project-img {
+  max-height: 80%;
+  max-width: 75%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 11.9vw;
+  text-align: center;
+}

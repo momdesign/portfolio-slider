@@ -8,32 +8,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/circular.css">
+  <link rel="stylesheet" href="css/circular.scss">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
 <div class="main">
-<!--  <div class="rects">-->
-<!--    <div class="rect-linear"></div>-->
-<!--    <div class="rect-eased"></div>-->
-<!--  </div>-->
-  <div class="view"></div>
-  <div class="wrapper">
+<!--  <div class="logo">MOMDESIGN</div>-->
+  <div class="circular-wrapper">
     <div class="circle-mock">
       <div class="center">
-        <div class="item-wrapper"><div class="item">0</div></div>
-        <div class="item-wrapper"><div class="item">1</div></div>
-        <div class="item-wrapper"><div class="item">2</div></div>
-        <div class="item-wrapper"><div class="item">3</div></div>
-        <div class="item-wrapper"><div class="item">4</div></div>
-        <div class="item-wrapper"><div class="item">5</div></div>
+        <div class="project-wrapper">
+          <div class="project">
+            <video class="project-video" autoplay muted loop playsinline>
+              <source src="/img/projects/animation-house/Animation Web.mp4" />
+            </video>
+          </div>
+        </div>
+        <div class="project-wrapper">
+          <div class="project">
+            <img class="project-img" src="/img/projects/brwsr/2brwsrs.jpg" />
+          </div>
+        </div>
+        <div class="project-wrapper">
+          <div class="project">
+            <img class="project-img" src="/img/projects/liminal/add%20bookmark.png" />
+          </div>
+        </div>
+        <div class="project-wrapper">
+          <div class="project">
+            <img class="project-img" src="/img/projects/mysweetdichotomy/1-iphone.png" />
+          </div>
+        </div>
+        <div class="project-wrapper">
+          <div class="project">
+            <video class="project-video" autoplay muted loop playsinline>
+              <source src="/img/projects/selma/composition_desktop_1080.mov" />
+            </video>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<script src="js/circular.js"></script>
+<script src="js/index.js"></script>
 </body>
 
 </html>

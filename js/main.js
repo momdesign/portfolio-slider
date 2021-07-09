@@ -1,9 +1,10 @@
-import gsap from 'gsap';
+import gsap, { Power2 } from 'gsap';
 
 import throttle from './throttle';
 
 const slides = Array.from(document.querySelectorAll('.slide'));
 const slider = document.querySelector('.slider');
+
 const getNextPrev = () => {
   const activeSlide = document.querySelector('.slide.active');
   const activeIdx = slides.indexOf(activeSlide);
@@ -65,14 +66,14 @@ function goToNextSlide() {
 
   slides.forEach((s, i ) => {
     if (i === activeIdx) {
-          gsap.to(s,  {xPercent: -100, duration: 0.7, ease: 'ease'});
+          gsap.to(s,  {xPercent: -100, duration: 0.8, ease: 'ease' });
       } else {
       if (s === next) {
-        gsap.to(s, { xPercent: 0, duration: 0.7, ease: 'ease' });
+        gsap.to(s, { xPercent: 0, duration: 0.8, ease: Power2.easeOut });
         gsap.to(s.children[0],  { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
       } else {
        if(s === nextAfterNext) {
-         gsap.to(s,  { xPercent: 95, duration: 0.7, ease: 'ease', delay: 0.2 });
+         gsap.to(s,  { xPercent: 95, duration: 0.65, ease: 'ease', delay: 0.45 });
        } else {
          gsap.set(s, { xPercent: 100 });
          gsap.set(s.children[0], { xPercent: 0});
@@ -105,11 +106,11 @@ function goToPrevSlide() {
 
  slides.forEach((s, i) => {
    if (i === activeIdx) {
-     gsap.to(s,  {xPercent: 95, duration: 0.7, ease: 'ease'});
+     gsap.to(s,  {xPercent: 95, duration: 0.7, ease: Power2.easeOut});
      gsap.to(s.children[0], {xPercent: 0});
    } else {
      if(s === prev) {
-       gsap.fromTo(s,  {xPercent: -100 }, { xPercent: 0, duration: 0.7, ease: 'ease' });
+       gsap.fromTo(s,  {xPercent: -100 }, { xPercent: 0, duration: 0.7, ease: Power2.easeOut });
        gsap.to(s.children[0], { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
      } else {
        if (s === next) {
