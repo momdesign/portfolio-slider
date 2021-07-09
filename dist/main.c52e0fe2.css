@@ -1,0 +1,47 @@
+.intro {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+
+}
+
+.buttons--wrapper {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.slider {
+  position: relative;
+  margin-top: 15vh;
+}
+.slide {
+  min-width: 100vw;
+  height: 60vh;
+  position: absolute;
+  /*background-color: white;*/
+  left: 0;
+  /*transition: left, transform 4s ease;*/
+  z-index: 0;
+}
+
+.slide.top {
+  /*transition: none;*/
+}
+
+.slide.top.active {
+  /*transition: left, transform 4s ease;*/
+}
+
+.slide img{
+  max-height: 60vh;
+  position: absolute;
+  /*transition:  transform 4s ease;*/
+}
+
+
+
+
+/*# sourceMappingURL=/main.c52e0fe2.css.map */
