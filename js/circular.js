@@ -15,7 +15,7 @@ class CircularScroll {
     this.easedY = 0;
 
     this.scroller.on(e => {
-      this.y = e.y / 8;
+      this.y = e.y / 10;
     });
   }
 
