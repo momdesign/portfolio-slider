@@ -1,6 +1,6 @@
 import gsap, { Power2 } from 'gsap';
 
-import throttle from './throttle';
+import throttle from './utils/throttle';
 
 const slides = Array.from(document.querySelectorAll('.slide'));
 const slider = document.querySelector('.slider');
@@ -124,7 +124,7 @@ function goToPrevSlide() {
  });
   activeSlide.classList.remove('active');
   prev.classList.add('active');
-};
+}
 
 const throttleClickNext = throttle(() => {
   goToNextSlide();

@@ -1,0 +1,79 @@
+@import 'mixins';
+
+.about {
+  @include size('margin-left', false, 65);
+  @include size('margin-bottom', false, 43);
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+
+  &__name {
+    @include size('font-size', false, 42);
+    @include size('letter-spacing', false, -2.63);
+    @include size('line-height', false, 46);
+
+    text-transform: uppercase;
+    font-family: 'trade-gothic-next', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  &__info, &__service, &__year {
+    @include size('font-size', false, 10);
+    @include size('letter-spacing', false, 0.4);
+
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: $font-primary;
+  }
+
+  &__info {
+    @include size('margin-top', false, 15);
+  }
+
+  &__year {
+    @include size('margin-top', false, 6);
+  }
+
+  &__more {
+    @include size('margin-top', false, 27);
+
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+  }
+
+  &__icon-info, &__icon-close {
+    @include size('width', false, 20);
+    @include size('height', false, 20);
+
+    transition: opacity 0.1s linear;
+    cursor: pointer;
+  }
+
+  &__icon-info {
+    opacity: 1;
+  }
+
+  &__icon-info--hidden {
+    opacity: 0;
+  }
+
+  &__icon-close {
+    opacity: 0;
+    display: none;
+    position: absolute;
+    z-index: 5;
+    top:0;
+    left:0;
+  }
+
+  &__icon-close--visible {
+    opacity: 1;
+    display: block;
+  }
+}

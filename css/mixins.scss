@@ -1,0 +1,19 @@
+@import 'variables';
+
+@mixin size($propName, $mobileValue, $desktopValue) {
+  @if $mobileValue {
+    #{$propName}: #{$mobileValue / $mockup-width-mobile * 100}vw;
+  }
+
+  @if $desktopValue {
+    @media (min-width: #{$desktop-start}px) {
+      #{$propName}: #{$desktopValue / $mockup-width-desktop * 100}vw;
+    }
+  }
+}
+
+@mixin for-desktop {
+  @media (min-width: #{$desktop-start}px) {
+    @content;
+  }
+}
