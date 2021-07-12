@@ -37,7 +37,9 @@ class CircularScroll {
       const position = e.y % 22600 < 0 ?
         (-1 * ((e.y - this.singleProjectYDuration / 2) % this.totalScroll)) :
         (-1 * ((e.y - this.singleProjectYDuration / 2) % this.totalScroll - this.totalScroll) % this.totalScroll);
+
       const activeProject = this.getProjects().find(pr => pr.startPos < position && position < pr.endPos);
+
       this.name.innerHTML = activeProject?.name;
       this.info.innerHTML = activeProject?.info;
       this.service.innerHTML = activeProject?.service;
