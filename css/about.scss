@@ -8,16 +8,38 @@
   bottom: 0;
   left: 0;
   z-index: 1;
+  right: 0;
 
-  &__name {
+  &__name, &__header {
     @include size('font-size', false, 42);
-    @include size('letter-spacing', false, -2.63);
-    @include size('line-height', false, 46);
+    @include size('letter-spacing', false, -2.23);
 
     text-transform: uppercase;
     font-family: 'trade-gothic-next', sans-serif;
     font-weight: 700;
     font-style: normal;
+    transition: opacity 0.2s linear;
+  }
+
+  &__name {
+    @include size('line-height', false, 34);
+    @include size('max-width', false, 279);
+
+    opacity: 1;
+
+    &-hidden {
+      opacity: 0;
+    }
+  }
+
+  &__header {
+    @include size('top', false, -52);
+
+    position: relative;
+    opacity: 0;
+    &-visible {
+      opacity: 1;
+    }
   }
 
   &__info, &__service, &__year {
@@ -31,14 +53,20 @@
 
   &__info {
     @include size('margin-top', false, 15);
+    @include size('max-width', false, 192);
   }
 
   &__year {
     @include size('margin-top', false, 6);
   }
 
-  &__more {
+  &__buttons-wrapper {
     @include size('margin-top', false, 27);
+
+    position: relative;
+  }
+
+  &__button {
 
     border: none;
     background-color: transparent;
@@ -47,33 +75,56 @@
     cursor: pointer;
   }
 
-  &__icon-info, &__icon-close {
+  &__icon {
     @include size('width', false, 20);
     @include size('height', false, 20);
 
-    transition: opacity 0.1s linear;
+    transition: opacity 0.2s linear;
     cursor: pointer;
+
   }
 
   &__icon-info {
     opacity: 1;
   }
 
-  &__icon-info--hidden {
+  &__icon-info-visible {
     opacity: 0;
   }
 
   &__icon-close {
     opacity: 0;
-    display: none;
     position: absolute;
     z-index: 5;
-    top:0;
+    top: 0;
     left:0;
   }
 
   &__icon-close--visible {
     opacity: 1;
-    display: block;
+  }
+
+  &__copy {
+    @include size('margin-left', false, 81);
+
+    opacity: 0;
+    transition: opacity 0.2s linear;
+
+    &-visible {
+      opacity: 1;
+    }
+  }
+
+  &__arrows {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s linear;
+
+    &-visible {
+      opacity: 1;
+    }
   }
 }

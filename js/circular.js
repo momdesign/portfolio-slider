@@ -18,6 +18,7 @@ class CircularScroll {
     this.info = document.querySelector('[data-about="info"]');
     this.year = document.querySelector('[data-about="year"]');
     this.service = document.querySelector('[data-about="service"]');
+    this.activeProject = this.getProjects()[0];
 
     this.positionWrappers();
     // це індекс ізінга, від 1 до 0.0000n ... - чим менший, тим довшим буде
@@ -31,22 +32,30 @@ class CircularScroll {
 
     this.totalScroll = 22600;
     this.singleProjectYDuration = this.totalScroll / this.projects.length;
+    this.isScrolling = true;
 
 
     this.scroller.on(e => {
+      if (!this.isScrolling) return;
+
       const position = e.y % 22600 < 0 ?
         (-1 * ((e.y - this.singleProjectYDuration / 2) % this.totalScroll)) :
         (-1 * ((e.y - this.singleProjectYDuration / 2) % this.totalScroll - this.totalScroll) % this.totalScroll);
 
-      const activeProject = this.getProjects().find(pr => pr.startPos < position && position < pr.endPos);
+      this.activeProject = this.getProjects().find(pr => pr.startPos < position && position < pr.endPos);
 
-      this.name.innerHTML = activeProject?.name;
-      this.info.innerHTML = activeProject?.info;
-      this.service.innerHTML = activeProject?.service;
-      this.year.innerHTML = activeProject?.year;
+      this.name.innerHTML = this.activeProject?.name;
+      this.info.innerHTML = this.activeProject?.info;
+      this.service.innerHTML = this.activeProject?.service;
+      this.year.innerHTML = this.activeProject?.year;
+      this.description = this.activeProject?.description;
 
       this.y = e.y / this.speed;
     });
+  }
+
+  setScrolling(isScrolling) {
+    this.isScrolling = isScrolling;
   }
 
   getProjects() {

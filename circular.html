@@ -19,18 +19,31 @@
 <body>
 <div class="main">
   <div class="logo-wrapper">
-    <img src="/img/mom-logo.svg" class="logo" alt="momnyc"/>
+    <img src="/img/mom-logo.svg" class="logo" alt="momnyc" data-animate="logo"/>
+    <div class="about__header" data-animate="header">Animation house</div>
   </div>
   <div class="about" data-about="about">
     <div class="about__name" data-about="name">Animation house</div>
     <div class="about__info" data-about="info">portfolio website</div>
     <div class="about__service" data-about="service">design / web</div>
     <div class="about__year" data-about="year">2021</div>
-
-    <button class="about__more" id="more">
-      <img src="/img/info-icon.png" class="about__icon-info" data-animate="info" alt="icon-info">
-      <img src="/img/close-icon.png" class="about__icon-close" data-animate="info" alt="icon-close">
+    <div class="about__buttons-wrapper">
+    <button class="about__button" id="more">
+      <img src="/img/info-icon.png" class="about__icon-info about__icon" data-animate="info" alt="icon-info">
+      <img src="/img/close-icon.png" class="about__icon-close about__icon" data-animate="close" alt="icon-close">
     </button>
+    <button class="about__button about__copy" data-animate="copy">
+      <img src="/img/copy-icon.png" class="about__icon-copy about__icon" data-animate="info" alt="icon-close">
+    </button>
+      <div class="about__arrows" data-animate="arrows">
+        <button class="about__button">
+          <img src="/img/left-icon.png" class="about__icon-left about__icon" data-animate="info" alt="icon-close">
+        </button>
+        <button class="about__button">
+          <img src="/img/right-icon.png" class="about__icon-right about__icon" data-animate="info" alt="icon-close">
+        </button>
+      </div>
+    </div>
   </div>
   <div class="circular-wrapper">
     <div class="circle-mock">

@@ -1,3 +1,5 @@
+@import 'mixins';
+
 // радіус кола по якому розташовуються проекти
 // зараз воно дорівнює 165% від висоти екрану
 $circle-radius: 165vh;
@@ -61,11 +63,18 @@ body {
   transform: translate(-50%, -50%);
 }
 
-//.logo {
-//  font-family: 'UnifrakturMaguntia', cursive;
-//  font-size: 11.9vw;
-//  text-align: center;
-//}
+
+.logo {
+  @include size('width', false, 161);
+
+  opacity: 1;
+  transition: visibility, opacity 0.2s linear;
+
+  &-hidden {
+    opacity: 0;
+  }
+}
+
 
 .logo-wrapper {
   position: absolute;
