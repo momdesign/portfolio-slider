@@ -66,18 +66,18 @@ function goToNextSlide() {
 
   slides.forEach((s, i ) => {
     if (i === activeIdx) {
-          gsap.to(s,  {xPercent: -100, duration: 0.8, ease: 'ease' });
-      } else {
+      gsap.to(s,  {xPercent: -100, duration: 0.8, ease: 'ease' });
+    } else {
       if (s === next) {
         gsap.to(s, { xPercent: 0, duration: 0.8, ease: Power2.easeOut });
         gsap.to(s.children[0],  { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
       } else {
-       if(s === nextAfterNext) {
-         gsap.to(s,  { xPercent: 95, duration: 0.65, ease: 'ease', delay: 0.45 });
-       } else {
-         gsap.set(s, { xPercent: 100 });
-         gsap.set(s.children[0], { xPercent: 0});
-       }
+        if(s === nextAfterNext) {
+          gsap.to(s,  { xPercent: 95, duration: 0.65, ease: 'ease', delay: 0.45 });
+        } else {
+          gsap.set(s, { xPercent: 100 });
+          gsap.set(s.children[0], { xPercent: 0});
+        }
       }
     }
   });
@@ -104,24 +104,24 @@ function goToPrevSlide() {
   const [next, prev] = getNextPrev();
   const activeIdx = slides.indexOf(activeSlide);
 
- slides.forEach((s, i) => {
-   if (i === activeIdx) {
-     gsap.to(s,  {xPercent: 95, duration: 0.7, ease: Power2.easeOut});
-     gsap.to(s.children[0], {xPercent: 0});
-   } else {
-     if(s === prev) {
-       gsap.fromTo(s,  {xPercent: -100 }, { xPercent: 0, duration: 0.7, ease: Power2.easeOut });
-       gsap.to(s.children[0], { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
-     } else {
-       if (s === next) {
-         gsap.to(s,  { xPercent: 100, duration: 0.3, ease: 'ease' });
-       } else {
-         gsap.set(s, { xPercent: 100 });
-         gsap.set(s.children[0], { xPercent: 0});
-       }
-     }
-   }
- });
+  slides.forEach((s, i) => {
+    if (i === activeIdx) {
+      gsap.to(s,  {xPercent: 95, duration: 0.7, ease: Power2.easeOut});
+      gsap.to(s.children[0], {xPercent: 0});
+    } else {
+      if(s === prev) {
+        gsap.fromTo(s,  {xPercent: -100 }, { xPercent: 0, duration: 0.7, ease: Power2.easeOut });
+        gsap.to(s.children[0], { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
+      } else {
+        if (s === next) {
+          gsap.to(s,  { xPercent: 100, duration: 0.3, ease: 'ease' });
+        } else {
+          gsap.set(s, { xPercent: 100 });
+          gsap.set(s.children[0], { xPercent: 0});
+        }
+      }
+    }
+  });
   activeSlide.classList.remove('active');
   prev.classList.add('active');
 }
@@ -146,6 +146,6 @@ prevBtn.addEventListener('click', () => {
 });
 
 window.addEventListener('keydown', e => {
- if(e.key === 'ArrowLeft') throttleClickPrev();
- if(e.key === 'ArrowRight') throttleClickNext();
-})
+  if(e.key === 'ArrowLeft') throttleClickPrev();
+  if(e.key === 'ArrowRight') throttleClickNext();
+});

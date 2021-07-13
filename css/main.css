@@ -12,7 +12,7 @@
   transform: translateX(-50%);
 }
 
-.slider {
+.slides-wrapper {
   position: relative;
   margin-top: 15vh;
 }
