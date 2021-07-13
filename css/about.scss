@@ -33,7 +33,7 @@
   }
 
   &__header {
-    @include size('top', false, -52);
+    @include size('top', false, -48);
 
     position: relative;
     opacity: 0;
@@ -93,7 +93,6 @@
 
   &__icon-close {
     opacity: 0;
-    display: none;
     position: absolute;
     z-index: 5;
     top: 0;
