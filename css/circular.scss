@@ -106,6 +106,9 @@ body {
   &-hidden {
     opacity: 0;
   }
+  &-invisible {
+    visibility: hidden;
+  }
 }
 
 .slider {

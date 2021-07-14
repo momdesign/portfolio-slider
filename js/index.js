@@ -67,5 +67,9 @@ const handleCopyLink = () => {
   inp.remove();
 };
 
+setTimeout(() => {
+  document.querySelector('[data-slider="first"]').classList.remove('slide-invisible');
+}, 300);
+
 copyBtn.addEventListener('click', handleCopyLink);
 details.addEventListener('click', handleDetails);

@@ -9,7 +9,7 @@ class Slider {
     this.nextBtn = this.slider.querySelector('[data-slider="next"]');
     this.prevBtn = this.slider.querySelector('[data-slider="prev"]');
 
-    this.setInitialSliderPosition(100);
+    this.setInitialSliderPosition(300);
 
     const throttleClickNext = throttle(() => this.goToNextSlide(), 300);
     const throttleClickPrev = throttle(() => this.goToPrevSlide(), 300);
@@ -141,6 +141,7 @@ class Slider {
     }
   };
 }
+
 
 export default Slider;
 
