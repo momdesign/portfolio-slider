@@ -19,6 +19,7 @@ class CircularScroll {
     this.year = document.querySelector('[data-about="year"]');
     this.service = document.querySelector('[data-about="service"]');
     this.activeProject = this.getProjects()[0];
+    this.distanceBeetweenPosAndCurrProject = 0;
 
     this.positionWrappers();
     // це індекс ізінга, від 1 до 0.0000n ... - чим менший, тим довшим буде
@@ -31,30 +32,39 @@ class CircularScroll {
     this.speed = isIos() ? 1 : 10;
     this.totalScroll = 2260 * this.speed;
     this.singleProjectYDuration = this.totalScroll / this.projects.length;
-    this.isScrolling = true;
+    this.scrollingHandlerBound = this.scrollingHandler.bind(this);
 
-
-    this.scroller.on(e => {
-      if (!this.isScrolling) return;
-
-      const position = e.y % this.totalScroll < 0 ?
-        (-1 * ((e.y - this.singleProjectYDuration / 2) % this.totalScroll)) :
-        (-1 * ((e.y - this.singleProjectYDuration / 2) % this.totalScroll - this.totalScroll) % this.totalScroll);
-
-      this.activeProject = this.getProjects().find(pr => pr.startPos < position && position < pr.endPos);
-
-      this.name.innerHTML = this.activeProject?.name;
-      this.info.innerHTML = this.activeProject?.info;
-      this.service.innerHTML = this.activeProject?.service;
-      this.year.innerHTML = this.activeProject?.year;
-      this.description = this.activeProject?.description;
-
-      this.y = e.y / this.speed;
-    });
+    this.scroller.on(this.scrollingHandlerBound);
   }
 
-  setScrolling(isScrolling) {
+  descriptionHandler(isOpen) {
+    !isOpen? this.scroller.off(this.scrollingHandlerBound) : this.scroller.on(this.scrollingHandlerBound);
+  }
+
+  scrollingHandler(e) {
+    const y = this.y * this.speed;
+    const position = y % this.totalScroll < 0 ?
+      (-1 * ((y - this.singleProjectYDuration / 2) % this.totalScroll)) :
+      (-1 * ((y - this.singleProjectYDuration / 2) % this.totalScroll - this.totalScroll) % this.totalScroll);
+
+    this.activeProject = this.getProjects().find(pr => pr.startPos < position && position < pr.endPos);
+    this.distanceBeetweenPosAndCurrProject = (position - this.activeProject.pos) / this.speed;
+    this.name.innerHTML = this.activeProject?.name;
+    this.info.innerHTML = this.activeProject?.info;
+    this.service.innerHTML = this.activeProject?.service;
+    this.year.innerHTML = this.activeProject?.year;
+    this.description = this.activeProject?.description;
+
+    this.y += e.deltaY / this.speed;
+  }
+
+  setIsScrolling(isScrolling) {
     this.isScrolling = isScrolling;
+  }
+
+  scrollToProject() {
+    this.y = this.y + this.distanceBeetweenPosAndCurrProject;
+    this.distanceBeetweenPosAndCurrProject = 0;
   }
 
   getProjects() {
@@ -65,7 +75,9 @@ class CircularScroll {
       service: el.getAttribute('data-project-service'),
       description: el.getAttribute('data-project-description'),
       startPos: i * this.singleProjectYDuration,
-      endPos: i * this.singleProjectYDuration + this.singleProjectYDuration
+      endPos: i * this.singleProjectYDuration + this.singleProjectYDuration,
+      pos: i * this.singleProjectYDuration + this.singleProjectYDuration / 2,
+      index: i
     }));
   }
 

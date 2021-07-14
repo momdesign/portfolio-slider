@@ -2,6 +2,7 @@
 
 .about {
   @include size('margin-left', false, 65);
+  @include size('margin-right', false, 65);
   @include size('margin-bottom', false, 43);
 
   position: absolute;

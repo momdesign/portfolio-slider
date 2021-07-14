@@ -18,7 +18,7 @@ const handleDetails = () => {
   const header = document.querySelector('[data-animate="header"]');
 
   isDetailsClose = !isDetailsClose;
-  circularScroll.setScrolling(isDetailsClose);
+  circularScroll.setIsScrolling(isDetailsClose);
   copyBtn.classList.toggle('about__copy-visible');
   arrows.classList.toggle('about__arrows-visible');
   moreDetailsBtn.classList.toggle('about__icon-info-visible');
@@ -26,8 +26,11 @@ const handleDetails = () => {
   header.classList.toggle('about__header-visible');
   logo.classList.toggle('logo-hidden');
 
+  circularScroll.scrollToProject();
+  circularScroll.descriptionHandler(isDetailsClose);
   header.innerHTML = circularScroll.activeProject.name;
-  !isDetailsClose ?
+
+  !isDetailsClose?
   name.classList.toggle('about__name-hidden') :
   setTimeout(() => name.classList.toggle('about__name-hidden'), 250);
 
