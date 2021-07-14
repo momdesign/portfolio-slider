@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/circular.scss">
-  <link rel="stylesheet" href="css/about.scss">
+  <link rel="stylesheet" href="css/more.scss">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
@@ -20,29 +20,21 @@
 <div class="main">
   <div class="logo-wrapper">
     <img src="/img/mom-logo.svg" class="logo" alt="momnyc" data-animate="logo"/>
-    <div class="about__header" data-animate="header">Animation house</div>
+    <div class="more__header" data-animate="header">Animation house</div>
   </div>
-  <div class="about" data-about="about">
-    <div class="about__name" data-about="name">Animation house</div>
-    <div class="about__info" data-about="info">portfolio website</div>
-    <div class="about__service" data-about="service">design / web</div>
-    <div class="about__year" data-about="year">2021</div>
-    <div class="about__buttons-wrapper">
-    <button class="about__button" id="more">
-      <img src="/img/info-icon.png" class="about__icon-info about__icon" data-animate="info" alt="icon-info">
-      <img src="/img/close-icon.png" class="about__icon-close about__icon" data-animate="close" alt="icon-close">
+  <div class="more" data-more="more">
+    <div class="more__name" data-more="name">Animation house</div>
+    <div class="more__info" data-more="info">portfolio website</div>
+    <div class="more__service" data-more="service">design / web</div>
+    <div class="more__year" data-more="year">2021</div>
+    <div class="more__buttons-wrapper">
+    <button class="more__button" id="more">
+      <img src="/img/info-icon.png" class="more__icon-info more__icon" data-animate="info" alt="icon-info">
+      <img src="/img/close-icon.png" class="more__icon-close more__icon" data-animate="close" alt="icon-close">
     </button>
-    <button class="about__button about__copy" data-animate="copy">
-      <img src="/img/copy-icon.png" class="about__icon-copy about__icon" data-animate="info" alt="icon-close">
+    <button class="more__button more__copy" data-animate="copy" data-copy="animationhouse.studio">
+      <img src="/img/copy-icon.png" class="more__icon-copy more__icon" data-animate="info" alt="icon-copy">
     </button>
-      <div class="about__arrows" data-animate="arrows">
-        <button class="about__button">
-          <img src="/img/left-icon.png" class="about__icon-left about__icon" data-animate="info" alt="icon-close">
-        </button>
-        <button class="about__button">
-          <img src="/img/right-icon.png" class="about__icon-right about__icon" data-animate="info" alt="icon-close">
-        </button>
-      </div>
     </div>
   </div>
   <div class="circular-wrapper">
@@ -50,70 +42,243 @@
       <div class="center">
         <div class="project-wrapper">
           <!-- Анімейшн хаус -->
-          <div class="project"
+          <div class="project slider"
                data-project-name="Animation House"
                data-project-info="portfolio website"
                data-project-service="design / web"
                data-project-year="2021"
                data-project-description="Portfolio website for an animation studio runned by a 9-years old."
+               data-project-copy="animationhouse.studio"
           >
-            <video class="project-video" autoplay muted loop playsinline>
-              <!-- картінки і відео можеш залити куда хош в інтернет і дати тут лінк -->
-              <source src="/img/projects/animation-house/Animation Web.mp4" />
-            </video>
-          </div>
+            <div class="slide active">
+              <video class="slide--item" autoplay muted loop playsinline>
+                <!-- картінки і відео можеш залити куда хош в інтернет і дати тут лінк -->
+                <source src="/img/projects/animation-house/Animation Web.mp4" />
+              </video>
+            </div>
 
+            <div class="slide slide-hidden">
+              <video class="slide--item" autoplay muted loop playsinline>
+                <!-- картінки і відео можеш залити куда хош в інтернет і дати тут лінк -->
+                <source src="/img/projects/animation-house/Phone.mp4" />
+              </video>
+            </div>
+
+            <div class="slide slide-hidden">
+              <video class="slide--item" autoplay muted loop playsinline>
+                <!-- картінки і відео можеш залити куда хош в інтернет і дати тут лінк -->
+                <source src="/img/projects/animation-house/Animation Web.mp4" />
+              </video>
+            </div>
+
+            <div class="slide slide-hidden">
+              <video class="slide--item" autoplay muted loop playsinline>
+                <!-- картінки і відео можеш залити куда хош в інтернет і дати тут лінк -->
+                <source src="/img/projects/animation-house/Phone.mp4" />
+              </video>
+            </div>
+
+            <div class="slider__arrows" data-animate="arrows">
+              <button class="more__button">
+                <img src="/img/left-icon.png" class="more__icon-left more__icon" data-animate="info" data-slider="prev" alt="icon-left">
+              </button>
+              <button class="more__button">
+                <img src="/img/right-icon.png" class="more__icon-right more__icon" data-animate="info" data-slider="next" alt="icon-right">
+              </button>
+            </div>
+          </div>
         </div>
         <div class="project-wrapper">
           <!-- BRWSR -->
-          <div class="project"
+          <div class="project slider"
                data-project-name="BRWSR"
                data-project-info="Self-initiated experiment"
                data-project-service="Concept"
                data-project-year="2019"
                data-project-description="Self-initiated experiment on limitations and opportunities of semantic web browsing using schema.org"
+               data-project-copy=""
           >
-            <img class="project-img" src="/img/projects/brwsr/2brwsrs.jpg" />
+
+            <div class="slide active">
+              <img src="/img/projects/brwsr/2brwsrs.jpg" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/brwsr/3brwsrs-4.jpg" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/brwsr/4brwsrs.jpg" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/brwsr/6brwsrs.jpg" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/brwsr/3brwsrs-4.jpg" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <video class="slide--item" autoplay muted loop playsinline>
+                <!-- картінки і відео можеш залити куда хош в інтернет і дати тут лінк -->
+                <source src="/img/projects/brwsr/brwsr_1.mov" />
+              </video>
+            </div>
+
+            <div class="slider__arrows" data-animate="arrows">
+              <button class="more__button">
+                <img src="/img/left-icon.png" class="more__icon-left more__icon" data-animate="info" data-slider="prev" alt="icon-left">
+              </button>
+              <button class="more__button">
+                <img src="/img/right-icon.png" class="more__icon-right more__icon" data-animate="info" data-slider="next" alt="icon-right">
+              </button>
+            </div>
           </div>
 
         </div>
         <div class="project-wrapper">
           <!-- лімінал -->
-          <div class="project"
+          <div class="project slider"
                data-project-name="Liminal"
                data-project-info=""
                data-project-service="Design / Development"
                data-project-year="WIP"
                data-project-description=""
+               data-project-copy="animationhouse.studio"
           >
-            <img class="project-img" src="/img/projects/liminal/add%20bookmark.png" />
+
+            <div class="slide active">
+              <img src="/img/projects/liminal/add%20bookmark.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/liminal/add%20recent.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/liminal/Bookmarks.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/liminal/bookmarks-alt.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/liminal/Count%20in.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/liminal/edit%20bar.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/liminal/edit%20group.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/liminal/liminal-2.0%20optimized.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/liminal/no%20bookmarks.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/liminal/set-bpm.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slider__arrows" data-animate="arrows">
+              <button class="more__button">
+                <img src="/img/left-icon.png" class="more__icon-left more__icon" data-animate="info" data-slider="prev" alt="icon-left">
+              </button>
+              <button class="more__button">
+                <img src="/img/right-icon.png" class="more__icon-right more__icon" data-animate="info" data-slider="next" alt="icon-right">
+              </button>
+            </div>
           </div>
 
         </div>
         <div class="project-wrapper">
           <!-- діхотомія -->
-          <div class="project"
+          <div class="project slider"
                data-project-name="MSD"
                data-project-info="Self-initiated experiment"
                data-project-service="Design / Development"
                data-project-year="2020"
                data-project-description="Self-initiated experiment with daily mood tracking during lockdown."
+               data-project-copy=""
           >
-            <img class="project-img" src="/img/projects/mysweetdichotomy/1-iphone.png" />
+
+            <div class="slide active">
+              <img src="/img/projects/mysweetdichotomy/1-iphone.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/mysweetdichotomy/2-iphone.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/mysweetdichotomy/3-iphone.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/mysweetdichotomy/4-iphone.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slider__arrows" data-animate="arrows">
+              <button class="more__button">
+                <img src="/img/left-icon.png" class="more__icon-left more__icon" data-animate="info" data-slider="prev" alt="icon-left">
+              </button>
+              <button class="more__button">
+                <img src="/img/right-icon.png" class="more__icon-right more__icon" data-animate="info" data-slider="next" alt="icon-right">
+              </button>
+            </div>
           </div>
 
         </div>
         <div class="project-wrapper">
           <!-- сельмочка -->
-          <div class="project"
+          <div class="project slider"
                data-project-name="Selma Durand"
                data-project-info="Portfolio website"
                data-project-service="Design / Development"
                data-project-year="2021"
-               data-project-description="Portfolio website for our friend, New York-based Industrial Designer Selma Durand.">
-            <video class="project-video" autoplay muted loop playsinline>
-              <source src="/img/projects/selma/composition_desktop_1080.mov" />
-            </video>
+               data-project-description="Portfolio website for our friend, New York-based Industrial Designer Selma Durand."
+               data-project-copy="selmadurand.com"
+          >
+
+            <div class="slide active">
+              <video class="slide--item" autoplay muted loop playsinline>
+                <!-- картінки і відео можеш залити куда хош в інтернет і дати тут лінк -->
+                <source src="/img/projects/selma/composition_desktop_1080.mov" />
+              </video>
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/selma/selma_ipad_desktop-3.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slide slide-hidden">
+              <video class="slide--item" autoplay muted loop playsinline>
+                <!-- картінки і відео можеш залити куда хош в інтернет і дати тут лінк -->
+                <source src="/img/projects/selma/composition_desktop_1080.mov" />
+              </video>
+            </div>
+
+            <div class="slide slide-hidden">
+              <img src="/img/projects/selma/selma_ipad_desktop-3.png" class="slide--item" alt="">
+            </div>
+
+            <div class="slider__arrows" data-animate="arrows">
+              <button class="more__button">
+                <img src="/img/left-icon.png" class="more__icon-left more__icon" data-animate="info" data-slider="prev" alt="icon-left">
+              </button>
+              <button class="more__button">
+                <img src="/img/right-icon.png" class="more__icon-right more__icon" data-animate="info" data-slider="next" alt="icon-right">
+              </button>
+            </div>
+
           </div>
 
         </div>

@@ -51,6 +51,7 @@ body {
 .project {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .project-video,
@@ -83,4 +84,47 @@ body {
   text-align: center;
   z-index: 1;
   margin-top: 2.7vw;
+}
+
+.slide {
+  min-height: 100vh;
+  min-width: 100vw;
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  z-index: 0;
+
+  &--item {
+    max-height: 75vh;
+    max-width: 78%;
+  }
+
+  &.active {
+    opacity: 1;
+  }
+  &-hidden {
+    opacity: 0;
+  }
+}
+
+.slider {
+  overflow: hidden;
+
+  &__arrows {
+    @include size('bottom', false, 43);
+    @include size('height', false, 20);
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s linear;
+    z-index: 100;
+
+    &-visible {
+      opacity: 1;
+    }
+  }
 }

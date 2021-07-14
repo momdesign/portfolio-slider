@@ -14,10 +14,10 @@ class CircularScroll {
     this.radians = 2 * Math.PI / this.projects.length;
     this.y = 0;
     this.easedY = this.y;
-    this.name = document.querySelector('[data-about="name"]');
-    this.info = document.querySelector('[data-about="info"]');
-    this.year = document.querySelector('[data-about="year"]');
-    this.service = document.querySelector('[data-about="service"]');
+    this.name = document.querySelector('[data-more="name"]');
+    this.info = document.querySelector('[data-more="info"]');
+    this.year = document.querySelector('[data-more="year"]');
+    this.service = document.querySelector('[data-more="service"]');
     this.activeProject = this.getProjects()[0];
     this.distanceBeetweenPosAndCurrProject = 0;
 
@@ -42,6 +42,7 @@ class CircularScroll {
   }
 
   scrollingHandler(e) {
+    this.y += e.deltaY / this.speed;
     const y = this.y * this.speed;
     const position = y % this.totalScroll < 0 ?
       (-1 * ((y - this.singleProjectYDuration / 2) % this.totalScroll)) :
@@ -54,8 +55,7 @@ class CircularScroll {
     this.service.innerHTML = this.activeProject?.service;
     this.year.innerHTML = this.activeProject?.year;
     this.description = this.activeProject?.description;
-
-    this.y += e.deltaY / this.speed;
+    this.copyLink = this.activeProject?.copyLink;
   }
 
   setIsScrolling(isScrolling) {
@@ -74,6 +74,7 @@ class CircularScroll {
       year: el.getAttribute('data-project-year'),
       service: el.getAttribute('data-project-service'),
       description: el.getAttribute('data-project-description'),
+      copyLink: el.getAttribute('data-project-copy'),
       startPos: i * this.singleProjectYDuration,
       endPos: i * this.singleProjectYDuration + this.singleProjectYDuration,
       pos: i * this.singleProjectYDuration + this.singleProjectYDuration / 2,

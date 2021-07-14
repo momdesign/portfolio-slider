@@ -1,29 +1,38 @@
 import CircularScroll from './circular';
+import Slider from './slider';
 
 const circularScroll = new CircularScroll();
 
-const details = document.querySelector('#more');
-const moreDetailsBtn = document.querySelector('[data-animate="info"]');
-const closeBtn = document.querySelector('[data-animate="close"]');
+const dqs = document.querySelector.bind(document);
+const dqsa = document.querySelectorAll.bind(document);
+
+const details = dqs('#more');
+const moreDetailsBtn = dqs('[data-animate="info"]');
+const closeBtn = dqs('[data-animate="close"]');
+const copyBtn = dqs('[data-animate="copy"]');
+const sliders = dqsa('.slider');
 let isDetailsClose = true;
 
 circularScroll.render();
 
+sliders.forEach((_, i) => new Slider(i));
+
 const handleDetails = () => {
-  const copyBtn = document.querySelector('[data-animate="copy"]');
-  const arrows = document.querySelector('[data-animate="arrows"]');
-  const info = document.querySelector('[data-about="info"]');
-  const name = document.querySelector('[data-about="name"]');
-  const logo = document.querySelector('[data-animate="logo"]');
-  const header = document.querySelector('[data-animate="header"]');
+  const copyBtn = dqs('[data-animate="copy"]');
+  const arrows = dqsa('[data-animate="arrows"]');
+  const info = dqs('[data-more="info"]');
+  const name = dqs('[data-more="name"]');
+  const logo = dqs('[data-animate="logo"]');
+  const header = dqs('[data-animate="header"]');
+  const currentSlider = dqsa('.slider')[circularScroll.activeProject.index];
+  const slides = currentSlider.querySelectorAll('.slide');
 
   isDetailsClose = !isDetailsClose;
   circularScroll.setIsScrolling(isDetailsClose);
-  copyBtn.classList.toggle('about__copy-visible');
-  arrows.classList.toggle('about__arrows-visible');
-  moreDetailsBtn.classList.toggle('about__icon-info-visible');
-  closeBtn.classList.toggle('about__icon-close--visible');
-  header.classList.toggle('about__header-visible');
+  copyBtn.classList.toggle('more__copy-visible');
+  moreDetailsBtn.classList.toggle('more__icon-info-visible');
+  closeBtn.classList.toggle('more__icon-close--visible');
+  header.classList.toggle('more__header-visible');
   logo.classList.toggle('logo-hidden');
 
   circularScroll.scrollToProject();
@@ -31,13 +40,32 @@ const handleDetails = () => {
   header.innerHTML = circularScroll.activeProject.name;
 
   !isDetailsClose?
-  name.classList.toggle('about__name-hidden') :
-  setTimeout(() => name.classList.toggle('about__name-hidden'), 250);
+  name.classList.toggle('more__name-hidden') :
+  setTimeout(() => name.classList.toggle('more__name-hidden'), 250);
 
   setTimeout(() => {
     info.innerHTML = !isDetailsClose ? circularScroll.activeProject.description : circularScroll.activeProject.info;
-  }, 200)
+  }, 200);
 
+  copyBtn.setAttribute('data-copy', circularScroll.copyLink);
+
+  slides.forEach(sl => {
+    if(!sl.classList.contains('active')){
+      sl.classList.toggle('slide-hidden');
+    }
+  });
+
+  arrows.forEach(el => el.classList.toggle('slider__arrows-visible'));
 };
 
+const handleCopyLink = () => {
+  const inp = document.createElement('input');
+  document.body.appendChild(inp);
+  inp.value = copyBtn.getAttribute('data-copy');
+  inp.select();
+  document.execCommand('copy',false);
+  inp.remove();
+};
+
+copyBtn.addEventListener('click', handleCopyLink);
 details.addEventListener('click', handleDetails);

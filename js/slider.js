@@ -9,13 +9,13 @@ class Slider {
     this.nextBtn = this.slider.querySelector('[data-slider="next"]');
     this.prevBtn = this.slider.querySelector('[data-slider="prev"]');
 
-    this.setInitialSliderPosition(10);
+    this.setInitialSliderPosition(100);
 
-    const throttleClickNext = throttle(() => this.goToNextSlide(), 200);
-    const throttleClickPrev = throttle(() => this.goToPrevSlide(), 200);
+    const throttleClickNext = throttle(() => this.goToNextSlide(), 300);
+    const throttleClickPrev = throttle(() => this.goToPrevSlide(), 300);
 
-    this.nextBtn.addEventListener('click', throttleClickNext);
-    this.prevBtn.addEventListener('click', throttleClickPrev);
+    this.nextBtn?.addEventListener('click', throttleClickNext);
+    this.prevBtn?.addEventListener('click', throttleClickPrev);
 
     window.addEventListener('keydown', e => {
       if(e.key === 'ArrowLeft') throttleClickPrev();
@@ -88,14 +88,14 @@ class Slider {
 
     this.slides.forEach((s, i ) => {
       if (i === activeIdx) {
-        gsap.to(s,  {xPercent: -100, duration: 0.8, ease: 'ease' });
+        gsap.fromTo(s,  {xPercent: 0}, {xPercent: -100, duration: 0.8, ease: 'ease' });
       } else {
         if (s === next) {
-          gsap.to(s, { xPercent: 0, duration: 0.8, ease: Power2.easeOut });
-          gsap.to(s.children[0],  { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
+          gsap.fromTo(s, {xPercent: 95},{ xPercent: 0, duration: 0.8, ease: Power2.easeOut });
+          gsap.fromTo(s.children[0], {xPercent: 0}, { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
         } else {
           if(s === nextAfterNext) {
-            gsap.to(s,  { xPercent: 95, duration: 0.65, ease: 'ease', delay: 0.45 });
+            gsap.fromTo(s,  {xPercent: 100},{ xPercent: 95, duration: 0.65, ease: 'ease', delay: 0.45 });
           } else {
             gsap.set(s, { xPercent: 100 });
             gsap.set(s.children[0], { xPercent: 0});
@@ -142,5 +142,5 @@ class Slider {
   };
 }
 
-new Slider(0);
+export default Slider;
 
