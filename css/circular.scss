@@ -114,7 +114,7 @@ body {
 .slider {
 
   &__arrows {
-    @include size('bottom', false, 43);
+    @include size('bottom', false, 46);
     @include size('height', false, 20);
 
     position: absolute;
@@ -146,11 +146,11 @@ body {
 
   &-clicker-left {
     left: 0;
-    cursor:  url('/img/left-icon.png'), auto;
+    cursor:  url('/img/left-arrow.svg'), auto;
   }
 
   &-clicker-right {
-    cursor:  url('/img/right-icon.png'), auto;
+    cursor:  url('/img/right-arrow.svg'), auto;
     right: 0;
   }
 }
