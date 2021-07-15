@@ -26,6 +26,7 @@ class CircularScroll {
     this.activeProject = this.getProjects()[0];
     this.distanceBeetweenPosAndCurrProject = 0;
     this.isEaseUnchanged = true;
+    this.scrollEndPromiseResolve = null;
 
     this.positionWrappers();
     // це індекс ізінга, від 1 до 0.0000n ... - чим менший, тим довшим буде
@@ -62,6 +63,8 @@ class CircularScroll {
     if (this.activeProject.index !== activeProject.index) {
       this.activeProject = activeProject;
       this.setProjectInfo();
+    } else {
+      this.activeProject = activeProject;
     }
   }
 
@@ -81,6 +84,10 @@ class CircularScroll {
   scrollToProject() {
     this.y = this.y + this.distanceBeetweenPosAndCurrProject;
     this.distanceBeetweenPosAndCurrProject = 0;
+
+    return new Promise(res => {
+      this.scrollEndPromiseResolve = res;
+    });
   }
 
   getProjects() {
@@ -121,8 +128,13 @@ class CircularScroll {
     const newEasedY = lerp(floorHundred(this.easedY), this.y, this.easing);
     this.isEaseUnchanged = floorHundred(newEasedY) === floorHundred(this.easedY);
 
-    this.easedY = newEasedY;
+    if (this.isEaseUnchanged && this.scrollEndPromiseResolve) {
+      this.scrollEndPromiseResolve();
 
+      this.scrollEndPromiseResolve = null;
+    }
+
+    this.easedY = newEasedY;
     this.positionProjects();
     window.requestAnimationFrame(this.render.bind(this));
   }
