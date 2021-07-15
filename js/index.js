@@ -41,9 +41,9 @@ const handleDetails = () => {
   circularScroll.toggleScroll(isDetailsClose);
   header.innerHTML = circularScroll.activeProject.name;
 
-  !isDetailsClose?
-  name.classList.toggle('more__name-hidden') :
-  setTimeout(() => name.classList.toggle('more__name-hidden'), 250);
+  !isDetailsClose
+    ? name.classList.toggle('more__name-hidden')
+    : setTimeout(() => name.classList.toggle('more__name-hidden'), 250);
 
   setTimeout(() => {
     info.innerHTML = !isDetailsClose ? circularScroll.activeProject.description : circularScroll.activeProject.info;
@@ -62,18 +62,8 @@ const handleDetails = () => {
   slidersArr[circularScroll.activeProject.index].isSliderOpen = !slidersArr[circularScroll.activeProject.index].isSliderOpen;
 };
 
-const handleCopyLink = () => {
-  const inp = document.createElement('input');
-  document.body.appendChild(inp);
-  inp.value = copyBtn.getAttribute('data-copy');
-  inp.select();
-  document.execCommand('copy',false);
-  inp.remove();
-};
-
 setTimeout(() => {
   document.querySelector('[data-slider="first"]').classList.remove('slide-invisible');
 }, 300);
 
-copyBtn.addEventListener('click', handleCopyLink);
 details.addEventListener('click', handleDetails);
