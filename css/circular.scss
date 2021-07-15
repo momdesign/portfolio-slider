@@ -112,7 +112,6 @@ body {
 }
 
 .slider {
-  overflow: hidden;
 
   &__arrows {
     @include size('bottom', false, 43);
@@ -125,9 +124,33 @@ body {
     opacity: 0;
     transition: opacity 0.2s linear;
     z-index: 100;
+    cursor: none;
 
     &-visible {
       opacity: 1;
+      cursor: pointer;
     }
+  }
+
+  &-clicker-left, &-clicker-right {
+    position: absolute;
+    top:0;
+    width: 50vw;
+    height: 80vh;
+    visibility: hidden;
+
+    &-active {
+      visibility: visible;
+    }
+  }
+
+  &-clicker-left {
+    left: 0;
+    cursor:  url('/img/left-icon.png'), auto;
+  }
+
+  &-clicker-right {
+    cursor:  url('/img/right-icon.png'), auto;
+    right: 0;
   }
 }

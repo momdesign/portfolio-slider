@@ -30,7 +30,7 @@ class CircularScroll {
     // це швидкість - чим більше число, тим повільніше скролиться
     // перше значення для iOS devices, друге для десктопу
     this.speed = isIos() ? 1 : 10;
-    this.totalScroll = 2260 * this.speed;
+    this.totalScroll = 2262.07 * this.speed;
     this.singleProjectYDuration = this.totalScroll / this.projects.length;
     this.scrollingHandlerBound = this.scrollingHandler.bind(this);
 

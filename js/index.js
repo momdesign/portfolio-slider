@@ -14,8 +14,9 @@ const sliders = dqsa('.slider');
 let isDetailsClose = true;
 
 circularScroll.render();
+let slidersArr = [];
 
-sliders.forEach((_, i) => new Slider(i));
+sliders.forEach((_, i) => slidersArr.push(new Slider(i)));
 
 const handleDetails = () => {
   const copyBtn = dqs('[data-animate="copy"]');
@@ -26,6 +27,7 @@ const handleDetails = () => {
   const header = dqs('[data-animate="header"]');
   const currentSlider = dqsa('.slider')[circularScroll.activeProject.index];
   const slides = currentSlider.querySelectorAll('.slide');
+  const sliderNavigation = dqsa('[data-navigation]');
 
   isDetailsClose = !isDetailsClose;
   circularScroll.setIsScrolling(isDetailsClose);
@@ -36,7 +38,7 @@ const handleDetails = () => {
   logo.classList.toggle('logo-hidden');
 
   circularScroll.scrollToProject();
-  circularScroll.descriptionHandler(isDetailsClose);
+  circularScroll.toggleScroll(isDetailsClose);
   header.innerHTML = circularScroll.activeProject.name;
 
   !isDetailsClose?
@@ -55,7 +57,9 @@ const handleDetails = () => {
     }
   });
 
+  sliderNavigation.forEach(el => el.classList.toggle('slider-clicker-left-active'));
   arrows.forEach(el => el.classList.toggle('slider__arrows-visible'));
+  slidersArr[circularScroll.activeProject.index].isSliderOpen = !slidersArr[circularScroll.activeProject.index].isSliderOpen;
 };
 
 const handleCopyLink = () => {
