@@ -5,6 +5,11 @@ import { isIos } from './utils/breakpoints';
 function lerp(a, b, n) {
   return (1 - n) * a + n * b;
 }
+
+function floorHundred(num) {
+  return Math.floor(num * 100) / 100;
+}
+
 class CircularScroll {
   constructor() {
     this.scroller = new VirtualScroll();
@@ -20,17 +25,18 @@ class CircularScroll {
     this.service = document.querySelector('[data-more="service"]');
     this.activeProject = this.getProjects()[0];
     this.distanceBeetweenPosAndCurrProject = 0;
+    this.isEaseUnchanged = true;
 
     this.positionWrappers();
     // це індекс ізінга, від 1 до 0.0000n ... - чим менший, тим довшим буде
     // інерційний рух (тобто рух вже після того як скрол відбувся), і повільнішою
     // сама анімація
-    this.easing = 0.05;
+    this.easing = 0.06;
 
     // це швидкість - чим більше число, тим повільніше скролиться
     // перше значення для iOS devices, друге для десктопу`
     this.speed = isIos() ? 1 : 10;
-    this.totalScroll = 2262 * this.speed;
+    this.totalScroll = 2262.07 * this.speed;
     this.singleProjectYDuration = this.totalScroll / this.projects.length;
     this.scrollingHandlerBound = this.scrollingHandler.bind(this);
 
@@ -43,13 +49,22 @@ class CircularScroll {
 
   scrollingHandler(e) {
     this.y += e.deltaY / this.speed;
+
     const y = this.y * this.speed;
     const position = y % this.totalScroll < 0 ?
       (-1 * ((y - this.singleProjectYDuration / 2) % this.totalScroll)) :
       (-1 * ((y - this.singleProjectYDuration / 2) % this.totalScroll - this.totalScroll) % this.totalScroll);
 
-    this.activeProject = this.getProjects().find(pr => pr.startPos < position && position < pr.endPos);
-    this.distanceBeetweenPosAndCurrProject = (position - this.activeProject.pos) / this.speed;
+    const activeProject = this.getProjects().find(pr => pr.startPos < position && position < pr.endPos);
+
+    this.distanceBeetweenPosAndCurrProject = (position - this.activeProject?.pos) / this.speed;
+
+    if (this.activeProject !== activeProject) {
+      this.setProjectInfo();
+    }
+  }
+
+  setProjectInfo() {
     this.name.innerHTML = this.activeProject?.name;
     this.info.innerHTML = this.activeProject?.info;
     this.service.innerHTML = this.activeProject?.service;
@@ -91,20 +106,28 @@ class CircularScroll {
     });
   };
 
-  render() {
-    this.easedY = Math.floor(this.easedY * 100) / 100;
-    this.easedY = lerp(this.easedY, this.y, this.easing);
+  onScrollEnd(cb) {
 
+    cb();
+  }
+
+  positionProjects() {
     const top = this.radius * Math.sin(this.easedY / 360);
     const left = this.radius * Math.cos(this.easedY / 360) - this.radius;
-
-    console.log(this.y);
 
     this.projects.forEach(pr => {
       pr.style.transform =
         `translate3d(${top}px, ${left}px, 0px)`;
     });
+  }
 
+  render() {
+    const newEasedY = lerp(floorHundred(this.easedY), this.y, this.easing);
+    this.isEaseUnchanged = floorHundred(newEasedY) === floorHundred(this.easedY);
+
+    this.easedY = newEasedY;
+
+    this.positionProjects();
     window.requestAnimationFrame(this.render.bind(this));
   }
 }
