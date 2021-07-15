@@ -9,7 +9,6 @@ const dqsa = document.querySelectorAll.bind(document);
 const details = dqs('#more');
 const moreDetailsBtn = dqs('[data-animate="info"]');
 const closeBtn = dqs('[data-animate="close"]');
-const copyBtn = dqs('[data-animate="copy"]');
 const sliders = dqsa('.slider');
 let isDetailsClose = true;
 
@@ -35,7 +34,9 @@ const handleDetails = () => {
   header.classList.toggle('more__header-visible');
   logo.classList.toggle('logo-hidden');
 
-  circularScroll.scrollToProject();
+  circularScroll.scrollToProject().then(() => {
+    console.log('done scrolling');
+  });
   circularScroll.descriptionHandler(isDetailsClose);
   header.innerHTML = circularScroll.activeProject.name;
 
