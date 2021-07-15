@@ -25,7 +25,6 @@ class CircularScroll {
     this.service = document.querySelector('[data-more="service"]');
     this.activeProject = this.getProjects()[0];
     this.distanceBeetweenPosAndCurrProject = 0;
-    this.isEaseUnchanged = true;
     this.scrollEndPromiseResolve = null;
 
     this.positionWrappers();
@@ -35,7 +34,7 @@ class CircularScroll {
     this.easing = 0.06;
 
     // це швидкість - чим більше число, тим повільніше скролиться
-    // перше значення для iOS devices, друге для десктопу`
+    // перше значення для iOS devices, друге для десктопу
     this.speed = isIos() ? 1 : 10;
     this.totalScroll = 2262.07 * this.speed;
     this.singleProjectYDuration = this.totalScroll / this.projects.length;
@@ -84,10 +83,6 @@ class CircularScroll {
   scrollToProject() {
     this.y = this.y + this.distanceBeetweenPosAndCurrProject;
     this.distanceBeetweenPosAndCurrProject = 0;
-
-    return new Promise(res => {
-      this.scrollEndPromiseResolve = res;
-    });
   }
 
   getProjects() {
@@ -126,13 +121,6 @@ class CircularScroll {
 
   render() {
     const newEasedY = lerp(floorHundred(this.easedY), this.y, this.easing);
-    this.isEaseUnchanged = floorHundred(newEasedY) === floorHundred(this.easedY);
-
-    if (this.isEaseUnchanged && this.scrollEndPromiseResolve) {
-      this.scrollEndPromiseResolve();
-
-      this.scrollEndPromiseResolve = null;
-    }
 
     this.easedY = newEasedY;
     this.positionProjects();
