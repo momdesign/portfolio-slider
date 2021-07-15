@@ -59,7 +59,8 @@ class CircularScroll {
 
     this.distanceBeetweenPosAndCurrProject = (position - this.activeProject?.pos) / this.speed;
 
-    if (this.activeProject !== activeProject) {
+    if (this.activeProject.index !== activeProject.index) {
+      this.activeProject = activeProject;
       this.setProjectInfo();
     }
   }
@@ -105,11 +106,6 @@ class CircularScroll {
       wr.style.top = `${this.radius * Math.cos(alpha) - (window.innerHeight / 2)}px`;
     });
   };
-
-  onScrollEnd(cb) {
-
-    cb();
-  }
 
   positionProjects() {
     const top = this.radius * Math.sin(this.easedY / 360);
