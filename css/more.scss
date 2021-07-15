@@ -13,11 +13,11 @@
   max-width: 30%;
 
   &__name, &__header {
-    @include size('font-size', false, 42);
-    @include size('letter-spacing', false, -2.23);
+    @include size('font-size', 20, 42);
+    @include size('letter-spacing', -0.4, -1.23);
 
     text-transform: uppercase;
-    font-family: trade-gothic-next-compressed, sans-serif;
+    font-family: 'trade-gothic-next-compressed', sans-serif;
     font-weight: 700;
     font-style: normal;
     transition: opacity 0.2s linear;

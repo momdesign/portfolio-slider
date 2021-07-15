@@ -24,17 +24,19 @@ const toggleSliderAndNavigation = (currentSlider) => {
   const sliderNavigation = dqsa('[data-navigation]');
   const arrows = dqsa('[data-animate="arrows"]');
 
-  circularScroll.scrollToProject().then(() => {
+  circularScroll.scrollToProject();
+  sliderNavigation.forEach(el => el.classList.toggle('slider-clicker-left-active'));
+  slidersArr[circularScroll.activeProject.index].isSliderOpen = !slidersArr[circularScroll.activeProject.index].isSliderOpen;
+
+  setTimeout(() => {
     slides.forEach(sl => {
-      if(!sl.classList.contains('active')){
+      if (!sl.classList.contains('active')) {
         sl.classList.toggle('slide-hidden');
       }
     });
 
     arrows.forEach(el => el.classList.toggle('slider__arrows-visible'));
-  });
-  sliderNavigation.forEach(el => el.classList.toggle('slider-clicker-left-active'));
-  slidersArr[circularScroll.activeProject.index].isSliderOpen = !slidersArr[circularScroll.activeProject.index].isSliderOpen;
+  }, 700);
 }
 
 const toggleDescriptionClasses = () => {
