@@ -101,10 +101,10 @@ body {
   }
 
   &.active {
-    opacity: 1;
+
   }
   &-hidden {
-    opacity: 0;
+    visibility: hidden;
   }
   &-invisible {
     visibility: hidden;
@@ -129,6 +129,10 @@ body {
     &-visible {
       opacity: 1;
       cursor: pointer;
+    }
+
+    @include for-desktop {
+      display: none;
     }
   }
 
