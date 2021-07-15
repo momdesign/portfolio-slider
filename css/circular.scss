@@ -68,11 +68,10 @@ body {
 .logo {
   @include size('width', false, 161);
 
-  opacity: 1;
-  transition: visibility, opacity 0.2s linear;
+  transition: transform 0.3s ease-in-out;
 
   &-hidden {
-    opacity: 0;
+   transform: translateY(-250%);
   }
 }
 
@@ -100,12 +99,15 @@ body {
     max-width: 78%;
   }
 
-  &.active {
-
+  &--video {
+    @include size('width', false, 1100);
   }
+
   &-hidden {
     visibility: hidden;
   }
+
+
   &-invisible {
     visibility: hidden;
   }

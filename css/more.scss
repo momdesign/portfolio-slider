@@ -38,9 +38,10 @@
     @include size('top', false, -48);
 
     position: relative;
-    opacity: 0;
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(-250%);
     &-visible {
-      opacity: 1;
+      transform: translateY(0);
     }
   }
 

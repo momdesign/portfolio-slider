@@ -19,15 +19,12 @@ circularScroll.render();
 
 sliders.forEach((_, i) => slidersArr.push(new Slider(i)));
 
-const toggleSliderAndNavigation = (currentSlider) => {
+const toggleSliderAndNavigation = (currentSlider, time) => {
   const slides = currentSlider.querySelectorAll('.slide');
   const sliderNavigation = dqsa('[data-navigation]');
   const arrows = dqsa('[data-animate="arrows"]');
 
-  circularScroll.scrollToProject();
-  sliderNavigation.forEach(el => el.classList.toggle('slider-clicker-left-active'));
-  slidersArr[circularScroll.activeProject.index].isSliderOpen = !slidersArr[circularScroll.activeProject.index].isSliderOpen;
-
+  circularScroll.scrollToProject()
   setTimeout(() => {
     slides.forEach(sl => {
       if (!sl.classList.contains('active')) {
@@ -36,7 +33,12 @@ const toggleSliderAndNavigation = (currentSlider) => {
     });
 
     arrows.forEach(el => el.classList.toggle('slider__arrows-visible'));
-  }, 700);
+  },  time);
+
+  console.log(time);
+  sliderNavigation.forEach(el => el.classList.toggle('slider-clicker-left-active'));
+  slidersArr[circularScroll.activeProject.index].onSliderToggle((time + 100) / 1000  , isDetailsClose);
+  slidersArr[circularScroll.activeProject.index].isSliderOpen = !slidersArr[circularScroll.activeProject.index].isSliderOpen;
 }
 
 const toggleDescriptionClasses = () => {
@@ -69,7 +71,7 @@ const handleDetails = () => {
   const currentSlider = dqsa('.slider')[circularScroll.activeProject.index];
 
   escapeEventHandler();
-  toggleSliderAndNavigation(currentSlider);
+  toggleSliderAndNavigation(currentSlider, Math.abs(circularScroll.distanceBeetweenPosAndCurrProject * 6 + 200));
   isDetailsClose = !isDetailsClose;
   circularScroll.setIsScrolling(isDetailsClose);
   toggleDescriptionClasses();

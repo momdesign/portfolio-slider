@@ -60,6 +60,8 @@ class Slider {
 
       this.slides.forEach((s, i) => {
         if (i === activeIdx) {
+          console.log(window.innerWidth);
+          console.log(s.children[0].clientWidth);
           gsap.set(s, { xPercent: 0 });
           gsap.set(s.children[0], { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
         } else {
@@ -67,7 +69,7 @@ class Slider {
             gsap.set(s, { xPercent: -100 });
           } else {
             if (s === next) {
-              gsap.set(s, { xPercent: 95 });
+              gsap.set(s, { xPercent: 110 });
             } else {
               gsap.set(s, { xPercent: 110 });
               gsap.set(s.children[0], { xPercent: 0});
@@ -77,6 +79,11 @@ class Slider {
       });
     }, time);
   };
+
+  onSliderToggle(time, isOpen) {
+    const [next] = this.getNextPrev();
+    isOpen ? gsap.to(next, {xPercent: 95, delay: time, duration: 0.8}) : gsap.to(next, {xPercent: 100, delay: time, duration: 0.5});
+  }
 
   goToNextSlide() {
     if(this.isSliderOpen){
