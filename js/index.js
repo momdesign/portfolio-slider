@@ -35,7 +35,13 @@ const handleDetails = () => {
   logo.classList.toggle('logo-hidden');
 
   circularScroll.scrollToProject().then(() => {
-    console.log('done scrolling');
+    slides.forEach(sl => {
+      if(!sl.classList.contains('active')){
+        sl.classList.toggle('slide-hidden');
+      }
+    });
+
+    arrows.forEach(el => el.classList.toggle('slider__arrows-visible'));
   });
   circularScroll.descriptionHandler(isDetailsClose);
   header.innerHTML = circularScroll.activeProject.name;
@@ -49,14 +55,6 @@ const handleDetails = () => {
   }, 200);
 
   copyBtn.setAttribute('data-copy', circularScroll.copyLink);
-
-  slides.forEach(sl => {
-    if(!sl.classList.contains('active')){
-      sl.classList.toggle('slide-hidden');
-    }
-  });
-
-  arrows.forEach(el => el.classList.toggle('slider__arrows-visible'));
 };
 
 setTimeout(() => {

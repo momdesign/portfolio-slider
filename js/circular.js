@@ -63,6 +63,8 @@ class CircularScroll {
     if (this.activeProject.index !== activeProject.index) {
       this.activeProject = activeProject;
       this.setProjectInfo();
+    } else {
+      this.activeProject = activeProject;
     }
   }
 
