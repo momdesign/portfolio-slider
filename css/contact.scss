@@ -12,7 +12,6 @@
   z-index: 999;
   display: flex;
   align-items: center;
-  //transform: translateY(100%);
 
   &--btn {
     @include size('margin-right', false, 65);

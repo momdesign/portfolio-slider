@@ -1,6 +1,7 @@
 import gsap, {Power2} from 'gsap';
 
 import { circularScroll } from "./index";
+
 const contact = document.querySelector('[data-animate="contact"]');
 const contactWrapper = document.querySelector('[data-animate="contact-wrapper"]');
 let isContactOpen = false;
@@ -19,8 +20,7 @@ const onClose = () => {
   circularScroll.stopScrollingHandler(isContactOpen);
 };
 
-tl
-  .from(contact, {yPercent: 100, duration: 0.8, ease: Power2.easeOut})
+tl.from(contact, {yPercent: 100, duration: 0.8, ease: Power2.easeOut})
   .from(contactWrapper, {opacity: 0, duration: 0.8});
 
 document.querySelector('[data-contact="open-button"]').addEventListener('click', onOpen);
