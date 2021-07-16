@@ -2,30 +2,25 @@
 
 .more {
   @include size('margin-left', false, 65);
-  @include size('margin-right', false, 65);
   @include size('margin-bottom', false, 43);
+  @include size('max-width', false, 279);
 
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: 1;
-  right: 0;
-  max-width: 30%;
+
 
   &__name, &__header {
     @include size('font-size', 20, 42);
     @include size('letter-spacing', -0.4, -1.23);
+    @include trade-gothic;
 
-    text-transform: uppercase;
-    font-family: 'trade-gothic-next-compressed', sans-serif;
-    font-weight: 700;
-    font-style: normal;
     transition: opacity 0.2s linear;
   }
 
   &__name {
     @include size('line-height', false, 34);
-    @include size('max-width', false, 279);
 
     opacity: 1;
 
@@ -38,7 +33,7 @@
     @include size('top', false, -48);
 
     position: relative;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.4s ease-in-out;
     transform: translateY(-250%);
     &-visible {
       transform: translateY(0);
@@ -79,8 +74,8 @@
   }
 
   &__icon {
-    @include size('width', false, 20);
-    @include size('height', false, 20);
+    @include size('width', false, 21);
+    @include size('height', false, 21);
 
     transition: opacity 0.2s linear;
     cursor: pointer;

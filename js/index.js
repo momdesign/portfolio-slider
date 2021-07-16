@@ -1,7 +1,8 @@
 import CircularScroll from './circular';
 import Slider from './slider';
+import contact from './contact';
 
-const circularScroll = new CircularScroll();
+export const circularScroll = new CircularScroll();
 
 const dqs = document.querySelector.bind(document);
 const dqsa = document.querySelectorAll.bind(document);
@@ -35,21 +36,23 @@ const toggleSliderAndNavigation = (currentSlider, time) => {
     arrows.forEach(el => el.classList.toggle('slider__arrows-visible'));
   },  time);
 
-  console.log(time);
   sliderNavigation.forEach(el => el.classList.toggle('slider-clicker-left-active'));
   slidersArr[circularScroll.activeProject.index].onSliderToggle((time + 100) / 1000  , isDetailsClose);
   slidersArr[circularScroll.activeProject.index].isSliderOpen = !slidersArr[circularScroll.activeProject.index].isSliderOpen;
 }
 
-const toggleDescriptionClasses = () => {
+const toggleDescriptionClasses = (time) => {
   const logo = dqs('[data-animate="logo"]');
   const name = dqs('[data-more="name"]');
 
   copyBtn.classList.toggle('more__copy-visible');
   moreDetailsBtn.classList.toggle('more__icon-info-visible');
   closeBtn.classList.toggle('more__icon-close--visible');
-  header.classList.toggle('more__header-visible');
-  logo.classList.toggle('logo-hidden');
+
+  setTimeout(() => {
+    header.classList.toggle('more__header-visible');
+    logo.classList.toggle('logo-hidden');
+  }, time + 200);
 
   !isDetailsClose
     ? name.classList.toggle('more__name-hidden')
@@ -69,13 +72,14 @@ const escapeEventHandler = () => {
 const handleDetails = () => {
   const info = dqs('[data-more="info"]');
   const currentSlider = dqsa('.slider')[circularScroll.activeProject.index];
+  const delayTime =  Math.abs(circularScroll.distanceBeetweenPosAndCurrProject * 6 + 200);
 
   escapeEventHandler();
-  toggleSliderAndNavigation(currentSlider, Math.abs(circularScroll.distanceBeetweenPosAndCurrProject * 6 + 200));
+  toggleSliderAndNavigation(currentSlider, delayTime);
   isDetailsClose = !isDetailsClose;
   circularScroll.setIsScrolling(isDetailsClose);
-  toggleDescriptionClasses();
-  circularScroll.descriptionHandler(isDetailsClose);
+  toggleDescriptionClasses(delayTime);
+  circularScroll.stopScrollingHandler(!isDetailsClose);
 
   header.innerHTML = circularScroll.activeProject.name;
 

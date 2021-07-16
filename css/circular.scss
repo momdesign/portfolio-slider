@@ -1,4 +1,6 @@
 @import 'mixins';
+@import 'slider';
+@import 'contact';
 
 // радіус кола по якому розташовуються проекти
 // зараз воно дорівнює 165% від висоти екрану
@@ -68,13 +70,12 @@ body {
 .logo {
   @include size('width', false, 161);
 
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.4s ease-in-out;
 
   &-hidden {
    transform: translateY(-250%);
   }
 }
-
 
 .logo-wrapper {
   position: absolute;
@@ -85,78 +86,3 @@ body {
   margin-top: 2.7vw;
 }
 
-.slide {
-  min-height: 100vh;
-  min-width: 100vw;
-  position: absolute;
-  left: 0;
-  display: flex;
-  align-items: center;
-  z-index: 0;
-
-  &--item {
-    max-height: 75vh;
-    max-width: 78%;
-  }
-
-  &--video {
-    @include size('width', false, 1100);
-  }
-
-  &-hidden {
-    visibility: hidden;
-  }
-
-
-  &-invisible {
-    visibility: hidden;
-  }
-}
-
-.slider {
-
-  &__arrows {
-    @include size('bottom', false, 46);
-    @include size('height', false, 20);
-
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.2s linear;
-    z-index: 100;
-    cursor: none;
-
-    &-visible {
-      opacity: 1;
-      cursor: pointer;
-    }
-
-    @include for-desktop {
-      display: none;
-    }
-  }
-
-  &-clicker-left, &-clicker-right {
-    position: absolute;
-    top:0;
-    width: 50vw;
-    height: 80vh;
-    visibility: hidden;
-
-    &-active {
-      visibility: visible;
-    }
-  }
-
-  &-clicker-left {
-    left: 0;
-    cursor:  url('/img/left-arrow.svg'), auto;
-  }
-
-  &-clicker-right {
-    cursor:  url('/img/right-arrow.svg'), auto;
-    right: 0;
-  }
-}

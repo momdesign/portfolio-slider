@@ -17,3 +17,10 @@
     @content;
   }
 }
+
+@mixin trade-gothic {
+  text-transform: uppercase;
+  font-family: 'trade-gothic-next-compressed', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}

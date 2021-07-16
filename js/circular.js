@@ -43,8 +43,8 @@ class CircularScroll {
     this.scroller.on(this.scrollingHandlerBound);
   }
 
-  descriptionHandler(isOpen) {
-    !isOpen? this.scroller.off(this.scrollingHandlerBound) : this.scroller.on(this.scrollingHandlerBound);
+  stopScrollingHandler(isOpen) {
+    isOpen? this.scroller.off(this.scrollingHandlerBound) : this.scroller.on(this.scrollingHandlerBound);
   }
 
   scrollingHandler(e) {
