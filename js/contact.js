@@ -10,7 +10,7 @@ const tl = gsap.timeline({ paused: true });
 const onOpen = () => {
   isContactOpen = true;
   tl.restart();
-  tl.play()
+  tl.play();
   circularScroll.stopScrollingHandler(isContactOpen);
 };
 

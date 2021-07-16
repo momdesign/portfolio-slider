@@ -94,7 +94,7 @@ class Slider {
           gsap.fromTo(s,  {xPercent: 0}, {xPercent: -100 });
         } else {
           if (s === next) {
-            gsap.fromTo(s, {xPercent: 95},{ xPercent: 0 , ease: Power2.easeOut});
+            gsap.fromTo(s, {xPercent: 95},{ xPercent: 0 });
             gsap.fromTo(s.children[0], {xPercent: 0}, { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
           } else {
             if(s === nextAfterNext) {
