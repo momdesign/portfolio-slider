@@ -10,22 +10,20 @@ let isIntroPlayed = false;
 
 export const initIntroAnimation = onInit => {
   const tl = gsap.timeline({ paused: true })
-    .from(sliders[0], { yPercent: 70, duration: 1.5, delay: 0.2, ease:Power2.easeInOut })
-    .from(logo, {opacity: 0})
-    .to(logo, {opacity: 1, delay: -0.3});
-  const  tlLogo = gsap.timeline({paused: true})
-    .from(introLogo, {
-      y: window.innerHeight / 2 - window.innerWidth / 10,
+    .from(sliders[0], { yPercent: 70, duration: 1.2, delay: 0.15, ease:Power2.easeInOut })
+  const  bigLogoAnimation = gsap.from(introLogo, {
+      y: window.innerHeight / 2 + window.innerWidth / 20,
       height: '10vw',
-      duration: 1.5,
-      ease:Power2.easeInOut})
-    .to(introLogo, {opacity: 0, delay: -0.2});
+      duration: 1.2,
+      ease:Power2.easeInOut}).paused(true);
+  const smallLogoAnimation = gsap.from(logo, {y: - window.innerWidth / 10, opacity: 0, delay: 0.4}).paused(true);
 
   window.addEventListener('wheel', e => {
     if (isIntroPlayed || e.deltaY < 0) return;
-
     isIntroPlayed = true;
-    tlLogo.play();
+    bigLogoAnimation.play();
+    smallLogoAnimation.play();
+
     tl.play().then( () => {
       onInit();
     });
