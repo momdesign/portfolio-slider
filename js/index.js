@@ -72,7 +72,7 @@ const escapeEventHandler = () => {
 const handleDetails = () => {
   const info = dqs('[data-more="info"]');
   const currentSlider = dqsa('.slider')[circularScroll.activeProject.index];
-  const delayTime =  Math.abs(circularScroll.distanceBeetweenPosAndCurrProject * 6 + 200);
+  const delayTime =  Math.abs(circularScroll.distanceBetweenPosAndCurrProject * 6 + 200);
 
   escapeEventHandler();
   toggleSliderAndNavigation(currentSlider, delayTime);

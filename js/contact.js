@@ -23,7 +23,7 @@ const onClose = () => {
 tl.from(contact, {yPercent: 100, duration: 0.8, ease: Power2.easeOut})
   .from(contactWrapper, {opacity: 0, duration: 0.8});
 
-document.querySelector('[data-contact="open-button"]').addEventListener('click', onOpen);
-document.querySelector('[data-contact="close-button"]').addEventListener('click', onClose);
+document.querySelector('[data-contact="open-button"]')?.addEventListener('click', onOpen);
+document.querySelector('[data-contact="close-button"]')?.addEventListener('click', onClose);
 
 export default {};

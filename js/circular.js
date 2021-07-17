@@ -6,7 +6,7 @@ function lerp(a, b, n) {
   return (1 - n) * a + n * b;
 }
 
-function floorHundred(num) {
+function floor(num) {
   return Math.floor(num * 100) / 100;
 }
 
@@ -15,7 +15,7 @@ class CircularScroll {
     this.scroller = new VirtualScroll();
     this.projects = [...document.querySelectorAll('.project')];
     this.projectWrappers = document.querySelectorAll('.project-wrapper');
-    this.radius = document.querySelector('.circular-wrapper').offsetHeight / 2;
+    this.radius = 0;
     this.radians = 2 * Math.PI / this.projects.length;
     this.y = 0;
     this.easedY = this.y;
@@ -24,23 +24,27 @@ class CircularScroll {
     this.year = document.querySelector('[data-more="year"]');
     this.service = document.querySelector('[data-more="service"]');
     this.activeProject = this.getProjects()[0];
-    this.distanceBeetweenPosAndCurrProject = 0;
+    this.distanceBetweenPosAndCurrProject = 0;
     this.scrollEndPromiseResolve = null;
-
-    this.positionWrappers();
-    // це індекс ізінга, від 1 до 0.0000n ... - чим менший, тим довшим буде
-    // інерційний рух (тобто рух вже після того як скрол відбувся), і повільнішою
-    // сама анімація
     this.easing = 0.06;
-
-    // це швидкість - чим більше число, тим повільніше скролиться
-    // перше значення для iOS devices, друге для десктопу
-    this.speed = isIos() ? 1 : 10;
+    this.speed = isIos() ? 0.7 : 10;
     this.totalScroll = 2262.07 * this.speed;
     this.singleProjectYDuration = this.totalScroll / this.projects.length;
     this.scrollingHandlerBound = this.scrollingHandler.bind(this);
 
     this.scroller.on(this.scrollingHandlerBound);
+    this.setRadius();
+    this.positionWrappers();
+    window.addEventListener('resize', () => this.handleResize());
+  }
+
+  setRadius() {
+    this.radius = document.querySelector('.circular-wrapper').offsetHeight / 2;
+  }
+
+  handleResize() {
+    this.setRadius();
+    this.positionWrappers();
   }
 
   stopScrollingHandler(isOpen) {
@@ -57,7 +61,7 @@ class CircularScroll {
 
     const activeProject = this.getProjects().find(pr => pr.startPos < position && position < pr.endPos);
 
-    this.distanceBeetweenPosAndCurrProject = (position - this.activeProject?.pos) / this.speed;
+    this.distanceBetweenPosAndCurrProject = (position - this.activeProject?.pos) / this.speed;
 
     if (this.activeProject.index !== activeProject.index) {
       this.activeProject = activeProject;
@@ -81,8 +85,8 @@ class CircularScroll {
   }
 
   scrollToProject() {
-    this.y = this.y + this.distanceBeetweenPosAndCurrProject;
-    this.distanceBeetweenPosAndCurrProject = 0;
+    this.y = this.y + this.distanceBetweenPosAndCurrProject;
+    this.distanceBetweenPosAndCurrProject = 0;
   }
 
   getProjects() {
@@ -104,8 +108,10 @@ class CircularScroll {
     this.projectWrappers.forEach((wr, i) => {
       const alpha = Math.PI - (i * this.radians);
 
-      wr.style.left = `${this.radius * Math.sin(alpha)}px`;
-      wr.style.top = `${this.radius * Math.cos(alpha) - (window.innerHeight / 2)}px`;
+      wr.style.width = `${window.innerWidth}px`;
+      wr.style.height = `${window.innerHeight}px`;
+      wr.style.left = `${floor(this.radius * Math.sin(alpha))}px`;
+      wr.style.top = `${floor(this.radius * Math.cos(alpha) - (window.innerHeight / 2))}px`;
     });
   };
 
@@ -115,12 +121,12 @@ class CircularScroll {
 
     this.projects.forEach(pr => {
       pr.style.transform =
-        `translate3d(${top}px, ${left}px, 0px)`;
+        `translate3d(${floor(top)}px, ${floor(left)}px, 0px)`;
     });
   }
 
   render() {
-    const newEasedY = lerp(floorHundred(this.easedY), this.y, this.easing);
+    const newEasedY = lerp(floor(this.easedY), this.y, this.easing);
 
     this.easedY = newEasedY;
     this.positionProjects();
