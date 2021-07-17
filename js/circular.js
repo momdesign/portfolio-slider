@@ -32,7 +32,6 @@ class CircularScroll {
     this.singleProjectYDuration = this.totalScroll / this.projects.length;
     this.scrollingHandlerBound = this.scrollingHandler.bind(this);
 
-    this.scroller.on(this.scrollingHandlerBound);
     this.setRadius();
     this.positionWrappers();
     window.addEventListener('resize', () => this.handleResize());
@@ -47,7 +46,7 @@ class CircularScroll {
     this.positionWrappers();
   }
 
-  stopScrollingHandler(isOpen) {
+  toggleScrollingHandler(isOpen) {
     isOpen? this.scroller.off(this.scrollingHandlerBound) : this.scroller.on(this.scrollingHandlerBound);
   }
 
@@ -123,6 +122,12 @@ class CircularScroll {
       pr.style.transform =
         `translate3d(${floor(top)}px, ${floor(left)}px, 0px)`;
     });
+  }
+
+  startScrolling() {
+    this.scroller.on(this.scrollingHandlerBound);
+
+    this.render();
   }
 
   render() {

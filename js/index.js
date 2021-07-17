@@ -1,6 +1,8 @@
+import gsap from 'gsap';
+
 import CircularScroll from './circular';
 import Slider from './slider';
-import contact from './contact';
+import { closeContacts, openContacts } from './contact';
 
 export const circularScroll = new CircularScroll();
 
@@ -15,8 +17,26 @@ const copyBtn = dqs('[data-animate="copy"]');
 const header = dqs('[data-animate="header"]');
 let isDetailsClose = true;
 let slidersArr = [];
+let isIntroPlayed = false;
 
-circularScroll.render();
+
+document.querySelector('[data-contact="open-button"]')?.addEventListener('click', () => {
+  closeContacts(() => circularScroll.toggleScrollingHandler(true));
+});
+document.querySelector('[data-contact="close-button"]')?.addEventListener('click', () => {
+  openContacts(() => circularScroll.toggleScrollingHandler(false));
+});
+
+// comment this for intro
+circularScroll.startScrolling();
+// window.addEventListener('wheel', e => {
+//   if (isIntroPlayed || e.deltaY < 0) return;
+//
+//   isIntroPlayed = true;
+//   gsap.fromTo(sliders[0], { y: -250 }, { y: 0 }).then( () => {
+//     circularScroll.startScrolling();
+//   });
+// });
 
 sliders.forEach((_, i) => slidersArr.push(new Slider(i)));
 
@@ -25,7 +45,7 @@ const toggleSliderAndNavigation = (currentSlider, time) => {
   const sliderNavigation = dqsa('[data-navigation]');
   const arrows = dqsa('[data-animate="arrows"]');
 
-  circularScroll.scrollToProject()
+  circularScroll.scrollToProject();
   setTimeout(() => {
     slides.forEach(sl => {
       if (!sl.classList.contains('active')) {
@@ -79,7 +99,7 @@ const handleDetails = () => {
   isDetailsClose = !isDetailsClose;
   circularScroll.setIsScrolling(isDetailsClose);
   toggleDescriptionClasses(delayTime);
-  circularScroll.stopScrollingHandler(!isDetailsClose);
+  circularScroll.toggleScrollingHandler(!isDetailsClose);
 
   header.innerHTML = circularScroll.activeProject.name;
 
