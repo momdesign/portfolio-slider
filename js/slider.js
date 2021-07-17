@@ -10,21 +10,22 @@ class Slider {
     this.prevBtns = this.slider.querySelectorAll('[data-slider="prev"]');
     this.isSliderOpen = false;
 
-    this.setInitialSliderPosition(300);
+    this.setInitialSliderPosition(400);
 
-    const throttleClickNext = throttle(() => this.goToNextSlide(), 300);
-    const throttleClickPrev = throttle(() => this.goToPrevSlide(), 300);
+    const throttleClickNext = throttle(() => this.goToNextSlide(), 400);
+    const throttleClickPrev = throttle(() => this.goToPrevSlide(), 400);
 
     window.addEventListener('keydown', e => {
       if(e.key === 'ArrowLeft') throttleClickPrev();
       if(e.key === 'ArrowRight') throttleClickNext();
     });
+    window.addEventListener('resize', () => this.setInitialSliderPosition(400));
 
     this.nextBtns.forEach(el => el?.addEventListener('click', throttleClickNext));
     this.prevBtns.forEach(el => el?.addEventListener('click', throttleClickPrev));
   }
 
-  getNextPrev () {
+  getNextPrev() {
     const activeSlide = this.slider.querySelector('.active');
     const activeIdx = this.slides.indexOf(activeSlide);
     let next, prev, nextAfterNext;
@@ -52,7 +53,7 @@ class Slider {
     return [next, prev, nextAfterNext];
   };
 
-  setInitialSliderPosition (time) {
+  setInitialSliderPosition(time) {
     setTimeout(() => {
       const activeSlide = this.slider.querySelector('.active');
       const activeIdx = this.slides.indexOf(activeSlide);
@@ -60,8 +61,6 @@ class Slider {
 
       this.slides.forEach((s, i) => {
         if (i === activeIdx) {
-          console.log(window.innerWidth);
-          console.log(s.children[0].clientWidth);
           gsap.set(s, { xPercent: 0 });
           gsap.set(s.children[0], { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
         } else {
@@ -82,28 +81,28 @@ class Slider {
 
   onSliderToggle(time, isOpen) {
     const [next] = this.getNextPrev();
-    isOpen ? gsap.to(next, {xPercent: 95, delay: time, duration: 0.8}) : gsap.to(next, {xPercent: 100, delay: time, duration: 0.5});
+    isOpen ? gsap.to(next, {xPercent: 95, delay: time , duration: 0.8}) : gsap.to(next, {xPercent: 105, delay: time, duration: 0.5});
   }
 
   goToNextSlide() {
     if(this.isSliderOpen){
       const activeSlide = this.slider.querySelector('.active');
       const activeIdx = this.slides.indexOf(activeSlide);
-      const [next, prev, nextAfterNext] = this.getNextPrev();
+      const [next, , nextAfterNext] = this.getNextPrev();
 
       this.slides.forEach((s, i ) => {
         if (i === activeIdx) {
-          gsap.fromTo(s,  {xPercent: 0}, {xPercent: -100 });
+          gsap.fromTo(s,  { xPercent: 0 }, { xPercent: -100, duration: 0.8 });
         } else {
           if (s === next) {
-            gsap.fromTo(s, {xPercent: 95},{ xPercent: 0 , ease: Power2.easeOut});
-            gsap.fromTo(s.children[0], {xPercent: 0}, { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
+            gsap.fromTo(s, { xPercent: 95, opacity: 1 },{ xPercent: 0 });
+            gsap.fromTo(s.children[0], { xPercent: 0 }, { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100 });
           } else {
             if(s === nextAfterNext) {
-              gsap.fromTo(s,  {xPercent: 110},{ xPercent: 95 });
+              gsap.fromTo(s,  { xPercent: 110 },{ xPercent: 95 });
             } else {
               gsap.set(s, { xPercent: 110 });
-              gsap.set(s.children[0], { xPercent: 0});
+              gsap.set(s.children[0], { xPercent: 0 });
             }
           }
         }
@@ -117,7 +116,7 @@ class Slider {
     if(this.isSliderOpen) {
       const activeSlide = this.slider.querySelector('.active');
       const activeIdx = this.slides.indexOf(activeSlide);
-      const [next, prev, nextAfterNext] = this.getNextPrev();
+      const [next, prev] = this.getNextPrev();
 
       this.slides.forEach((s, i) => {
         if (i === activeIdx) {

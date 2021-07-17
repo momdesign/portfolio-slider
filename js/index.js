@@ -1,7 +1,10 @@
+import gsap from 'gsap';
+
 import CircularScroll from './circular';
 import Slider from './slider';
+import { closeContacts, openContacts } from './contact';
 
-const circularScroll = new CircularScroll();
+export const circularScroll = new CircularScroll();
 
 const dqs = document.querySelector.bind(document);
 const dqsa = document.querySelectorAll.bind(document);
@@ -14,8 +17,26 @@ const copyBtn = dqs('[data-animate="copy"]');
 const header = dqs('[data-animate="header"]');
 let isDetailsClose = true;
 let slidersArr = [];
+let isIntroPlayed = false;
 
-circularScroll.render();
+
+document.querySelector('[data-contact="open-button"]')?.addEventListener('click', () => {
+  closeContacts(() => circularScroll.toggleScrollingHandler(true));
+});
+document.querySelector('[data-contact="close-button"]')?.addEventListener('click', () => {
+  openContacts(() => circularScroll.toggleScrollingHandler(false));
+});
+
+// comment this for intro
+circularScroll.startScrolling();
+// window.addEventListener('wheel', e => {
+//   if (isIntroPlayed || e.deltaY < 0) return;
+//
+//   isIntroPlayed = true;
+//   gsap.fromTo(sliders[0], { y: -250 }, { y: 0 }).then( () => {
+//     circularScroll.startScrolling();
+//   });
+// });
 
 sliders.forEach((_, i) => slidersArr.push(new Slider(i)));
 
@@ -24,7 +45,7 @@ const toggleSliderAndNavigation = (currentSlider, time) => {
   const sliderNavigation = dqsa('[data-navigation]');
   const arrows = dqsa('[data-animate="arrows"]');
 
-  circularScroll.scrollToProject()
+  circularScroll.scrollToProject();
   setTimeout(() => {
     slides.forEach(sl => {
       if (!sl.classList.contains('active')) {
@@ -35,21 +56,23 @@ const toggleSliderAndNavigation = (currentSlider, time) => {
     arrows.forEach(el => el.classList.toggle('slider__arrows-visible'));
   },  time);
 
-  console.log(time);
   sliderNavigation.forEach(el => el.classList.toggle('slider-clicker-left-active'));
   slidersArr[circularScroll.activeProject.index].onSliderToggle((time + 100) / 1000  , isDetailsClose);
   slidersArr[circularScroll.activeProject.index].isSliderOpen = !slidersArr[circularScroll.activeProject.index].isSliderOpen;
 }
 
-const toggleDescriptionClasses = () => {
+const toggleDescriptionClasses = (time) => {
   const logo = dqs('[data-animate="logo"]');
   const name = dqs('[data-more="name"]');
 
   copyBtn.classList.toggle('more__copy-visible');
   moreDetailsBtn.classList.toggle('more__icon-info-visible');
   closeBtn.classList.toggle('more__icon-close--visible');
-  header.classList.toggle('more__header-visible');
-  logo.classList.toggle('logo-hidden');
+
+  setTimeout(() => {
+    header.classList.toggle('more__header-visible');
+    logo.classList.toggle('logo-hidden');
+  }, time + 200);
 
   !isDetailsClose
     ? name.classList.toggle('more__name-hidden')
@@ -69,13 +92,14 @@ const escapeEventHandler = () => {
 const handleDetails = () => {
   const info = dqs('[data-more="info"]');
   const currentSlider = dqsa('.slider')[circularScroll.activeProject.index];
+  const delayTime =  Math.abs(circularScroll.distanceBetweenPosAndCurrProject * 6 + 200);
 
   escapeEventHandler();
-  toggleSliderAndNavigation(currentSlider, Math.abs(circularScroll.distanceBeetweenPosAndCurrProject * 6 + 200));
+  toggleSliderAndNavigation(currentSlider, delayTime);
   isDetailsClose = !isDetailsClose;
   circularScroll.setIsScrolling(isDetailsClose);
-  toggleDescriptionClasses();
-  circularScroll.descriptionHandler(isDetailsClose);
+  toggleDescriptionClasses(delayTime);
+  circularScroll.toggleScrollingHandler(!isDetailsClose);
 
   header.innerHTML = circularScroll.activeProject.name;
 

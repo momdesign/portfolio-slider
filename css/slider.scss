@@ -1,0 +1,76 @@
+@import 'mixins';
+
+.slider {
+  &__arrows {
+    @include size('bottom', false, 46);
+    @include size('height', false, 20);
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s linear;
+    z-index: 100;
+    cursor: none;
+
+    &-visible {
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    @include for-desktop {
+      display: none;
+    }
+  }
+
+  &-clicker-left, &-clicker-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50vw;
+    height: 70vh;
+    visibility: hidden;
+
+    &-active {
+      visibility: visible;
+    }
+  }
+
+  &-clicker-left {
+    left: 0;
+    cursor:  url('/img/left-arrow.svg'), auto;
+  }
+
+  &-clicker-right {
+    cursor:  url('/img/right-arrow.svg'), auto;
+    right: 0;
+  }
+}
+
+.slide {
+  min-height: 100vh;
+  min-width: 100vw;
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  z-index: 0;
+
+  &--item {
+    max-height: 75vh;
+    max-width: 78%;
+  }
+
+  &--video {
+    @include size('width', false, 1100);
+  }
+
+  &-hidden {
+    visibility: hidden;
+  }
+
+  &-invisible {
+    visibility: hidden;
+  }
+}

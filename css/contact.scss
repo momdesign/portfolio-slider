@@ -1,0 +1,95 @@
+@import 'variables';
+@import 'mixins';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.contact {
+  top:0;
+  left:0;
+  bottom: 0;
+  right: 0;
+  background-color: #0e0e0e;
+  position: absolute;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+
+  &--btn {
+    @include size('margin-right', false, 65);
+    @include size('margin-bottom', false, 44.5);
+    @include size('font-size', false, 10);
+    @include size('letter-spacing', false, 0.4);
+
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: $font-primary;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    right: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &--wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__we-do {
+    @include size('width', false, 387);
+    @include size('font-size', false, 42);
+    @include size('line-height', false, 37);
+    @include size('letter-spacing', -0.4, 0);
+    @include size('margin-left', false, 55);
+
+    @include trade-gothic;
+
+
+    color: $dark-grey;
+    text-transform: uppercase;
+  }
+
+  &__credentials {
+    @include size('width', false, 400);
+    @include size('margin-right', false, 65);
+
+    color: $dark-grey;
+  }
+
+  &__say-hi {
+    @include size('font-size', false, 123);
+    @include size('line-height', false, 96);
+    @include size('letter-spacing', false, 5.6);
+
+    font-family: 'UnifrakturMaguntia', cursive;
+    //text-transform: uppercase;
+  }
+
+  &__email {
+    @include size('font-size', false, 42);
+    @include size('line-height', false, 37);
+    @include size('letter-spacing', -0.4, 0);
+    @include trade-gothic;
+  }
+
+  &__close {
+    @include size('margin-right', false, 65);
+    @include size('margin-bottom', false, 44.5);
+    @include size('font-size', false, 10);
+    @include size('letter-spacing', false, 0.4);
+
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: $font-primary;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    right: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: $dark-grey;
+  }
+}

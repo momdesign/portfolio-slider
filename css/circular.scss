@@ -1,8 +1,8 @@
 @import 'mixins';
+@import 'slider';
+@import 'contact';
 
-// радіус кола по якому розташовуються проекти
-// зараз воно дорівнює 165% від висоти екрану
-$circle-radius: 165vh;
+$circle-radius: 135vh;
 
 * {
   box-sizing: border-box;
@@ -10,6 +10,12 @@ $circle-radius: 165vh;
 
 html, body {
   height: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 body {
@@ -43,8 +49,6 @@ body {
 
 .project-wrapper {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
   transform: translateX(-50%);
 }
 
@@ -68,13 +72,12 @@ body {
 .logo {
   @include size('width', false, 161);
 
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.4s ease-in-out;
 
   &-hidden {
    transform: translateY(-250%);
   }
 }
-
 
 .logo-wrapper {
   position: absolute;
