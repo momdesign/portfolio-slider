@@ -95,8 +95,8 @@ body {
   z-index: 0;
 
   &--item {
-    max-height: 75vh;
-    max-width: 78%;
+    max-height: 100vh;
+    max-width: 100%;
   }
 
   &--video {
@@ -152,11 +152,11 @@ body {
 
   &-clicker-left {
     left: 0;
-    cursor:  url('/img/left-arrow.svg'), auto;
+    cursor:  url('/img/left-arrow-big.svg'), auto;
   }
 
   &-clicker-right {
-    cursor:  url('/img/right-arrow.svg'), auto;
+    cursor:  url('/img/right-arrow-big.svg'), auto;
     right: 0;
   }
 }
