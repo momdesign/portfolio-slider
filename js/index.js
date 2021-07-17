@@ -21,10 +21,10 @@ let isIntroPlayed = false;
 
 
 document.querySelector('[data-contact="open-button"]')?.addEventListener('click', () => {
-  closeContacts(() => circularScroll.toggleScrollingHandler(true));
+  openContacts(() => circularScroll.toggleScrollingHandler(true));
 });
 document.querySelector('[data-contact="close-button"]')?.addEventListener('click', () => {
-  openContacts(() => circularScroll.toggleScrollingHandler(false));
+  closeContacts(() => circularScroll.toggleScrollingHandler(false));
 });
 
 // comment this for intro
