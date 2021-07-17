@@ -32,17 +32,18 @@
   }
 
   &--wrapper {
-    width: 100%;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
   }
 
   &__we-do {
     @include size('width', false, 387);
-    @include size('font-size', false, 42);
-    @include size('line-height', false, 37);
+    @include size('font-size', 42, 42);
+    @include size('line-height', 37, 37);
     @include size('letter-spacing', -0.4, 0);
     @include size('margin-left', false, 55);
+    @include size('padding-left', 20, 0);
 
     @include trade-gothic;
 
@@ -58,27 +59,19 @@
     color: $dark-grey;
   }
 
-  &__say-hi {
-    @include size('font-size', false, 123);
-    @include size('line-height', false, 96);
-    @include size('letter-spacing', false, 5.6);
-
-    font-family: 'UnifrakturMaguntia', cursive;
-    //text-transform: uppercase;
-  }
-
   &__email {
-    @include size('font-size', false, 42);
-    @include size('line-height', false, 37);
+    @include size('font-size', 42, 42);
+    @include size('line-height', 37, 37);
     @include size('letter-spacing', -0.4, 0);
+    @include size('padding-left', 20, 0);
     @include trade-gothic;
   }
 
   &__close {
-    @include size('margin-right', false, 65);
-    @include size('margin-bottom', false, 44.5);
-    @include size('font-size', false, 10);
-    @include size('letter-spacing', false, 0.4);
+    @include size('margin-right', 20, 65);
+    @include size('margin-bottom', 20, 44.5);
+    @include size('font-size', 10, 10);
+    @include size('letter-spacing', 0.4, 0.4);
 
     text-transform: uppercase;
     font-weight: 600;
@@ -91,5 +84,16 @@
     background-color: transparent;
     cursor: pointer;
     color: $dark-grey;
+  }
+
+  &__logo-wrapper {
+    @include size('margin-top', 0, 5);
+  }
+
+  &__logo {
+    @include size('width', 161, 161);
+
+    margin: 0 auto;
+    display: block;
   }
 }
