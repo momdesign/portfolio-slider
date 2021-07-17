@@ -6,6 +6,7 @@ let isContactOpen = false;
 const tl = gsap.timeline({ paused: true });
 
 export const openContacts = onOpen => {
+  console.log(1);
   isContactOpen = true;
   tl.restart();
   tl.play();
