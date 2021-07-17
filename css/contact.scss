@@ -35,6 +35,11 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+
+    @include for-desktop {
+      width: 100%;
+      flex-direction: row;
+    }
   }
 
   &__we-do {
