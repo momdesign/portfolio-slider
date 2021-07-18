@@ -32,6 +32,7 @@ class CircularScroll {
     this.totalScroll = 2262.07 * this.speed;
     this.singleProjectYDuration = this.totalScroll / this.projects.length;
     this.scrollingHandlerBound = this.scrollingHandler.bind(this);
+    this.isCentered = true;
 
     this.setRadius();
     this.positionWrappers();
@@ -52,6 +53,7 @@ class CircularScroll {
   }
 
   scrollingHandler(e) {
+    this.isCentered = false;
     this.y += e.deltaY / this.speed;
 
     const y = this.y * this.speed;
@@ -85,6 +87,10 @@ class CircularScroll {
   }
 
   scrollToProject(i) {
+    if (this.isCentered) return;
+
+    this.isCentered = true;
+
     if (i || i === 0) {
       if (this.activeProject.index === this.projects.length - 1 && i === 0) {
         this.y = this.y - (this.totalScroll + + this.singleProjectYDuration / 2 - this.position) / this.speed;
