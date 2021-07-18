@@ -22,8 +22,6 @@ function onTouchMove(evt) {
     return;
   }
 
-  console.log(xDiff, yDiff);
-
   xDiff = xDown - evt.touches[0].clientX;
   yDiff = yDown - evt.touches[0].clientY;
 }

@@ -19,6 +19,7 @@ class CircularScroll {
     this.radians = 2 * Math.PI / this.projects.length;
     this.y = 0;
     this.easedY = this.y;
+    this.position = this.y;
     this.name = document.querySelector('[data-more="name"]');
     this.info = document.querySelector('[data-more="info"]');
     this.year = document.querySelector('[data-more="year"]');
@@ -54,13 +55,13 @@ class CircularScroll {
     this.y += e.deltaY / this.speed;
 
     const y = this.y * this.speed;
-    const position = y % this.totalScroll < 0 ?
+    this.position = y % this.totalScroll < 0 ?
       (-1 * ((y - this.singleProjectYDuration / 2) % this.totalScroll)) :
       (-1 * ((y - this.singleProjectYDuration / 2) % this.totalScroll - this.totalScroll) % this.totalScroll);
 
-    const activeProject = this.getProjects().find(pr => pr.startPos < position && position < pr.endPos);
+    const activeProject = this.getProjects().find(pr => pr.startPos < this.position && this.position < pr.endPos);
 
-    this.distanceBetweenPosAndCurrProject = (position - this.activeProject?.pos) / this.speed;
+    this.distanceBetweenPosAndCurrProject = (this.position - this.activeProject?.pos) / this.speed;
 
     if (this.activeProject.index !== activeProject.index) {
       this.activeProject = activeProject;
@@ -83,9 +84,18 @@ class CircularScroll {
     this.isScrolling = isScrolling;
   }
 
-  scrollToProject() {
-    this.y = this.y + this.distanceBetweenPosAndCurrProject;
-    this.distanceBetweenPosAndCurrProject = 0;
+  scrollToProject(i) {
+    if (i || i === 0) {
+      if (this.activeProject.index === this.projects.length - 1 && i === 0) {
+        this.y = this.y - (this.totalScroll + + this.singleProjectYDuration / 2 - this.position) / this.speed;
+      } else {
+        const distance = (this.position - this.getProjects()[i].pos) / this.speed;
+        this.y = this.y + distance;
+      }
+    } else {
+      this.y = this.y + this.distanceBetweenPosAndCurrProject;
+      this.distanceBetweenPosAndCurrProject = 0;
+    }
   }
 
   getProjects() {
@@ -131,9 +141,7 @@ class CircularScroll {
   }
 
   render() {
-    const newEasedY = lerp(floor(this.easedY), this.y, this.easing);
-
-    this.easedY = newEasedY;
+    this.easedY = lerp(floor(this.easedY), this.y, this.easing);
     this.positionProjects();
     window.requestAnimationFrame(this.render.bind(this));
   }

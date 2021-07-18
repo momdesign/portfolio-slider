@@ -54,15 +54,19 @@ class Slider {
   };
 
   setInitialSliderPosition(time) {
+    const activeSlide = this.slider.querySelector('.active');
+
+    activeSlide.children[0].style.transform = 'translateY(100%)';
+
     setTimeout(() => {
-      const activeSlide = this.slider.querySelector('.active');
       const activeIdx = this.slides.indexOf(activeSlide);
       const [next, prev] = this.getNextPrev();
 
       this.slides.forEach((s, i) => {
         if (i === activeIdx) {
           gsap.set(s, { xPercent: 0 });
-          gsap.set(s.children[0], { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100  });
+          gsap.to(s.children[0], { y: 0 });
+          gsap.set(s.children[0], { xPercent: ((window.innerWidth - s.children[0]?.clientWidth) / (2 * s.children[0]?.clientWidth)) * 100 });
         } else {
           if (s === prev) {
             gsap.set(s, { xPercent: -100 });

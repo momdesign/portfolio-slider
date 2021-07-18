@@ -1,5 +1,3 @@
-import gsap, {Power2} from 'gsap';
-
 import CircularScroll from './circular';
 import Slider from './slider';
 import { closeContacts, openContacts } from './contact';
@@ -20,12 +18,18 @@ let slidersArr = [];
 
 initIntroAnimation(() => circularScroll.startScrolling());
 
-sliders.forEach((_, i) => slidersArr.push(new Slider(i)));
+sliders.forEach((s, i) => {
+  s.addEventListener('click', e => {
+    if (isDetailsClose && !!e.target.closest('.slide.active')) {
+      circularScroll.scrollToProject(i);
+    }
+  });
+  slidersArr.push(new Slider(i));
+});
 
 const toggleSliderAndNavigation = (currentSlider, time) => {
   const slides = currentSlider.querySelectorAll('.slide');
   const sliderNavigation = dqsa('[data-navigation]');
-  const arrows = dqsa('[data-animate="arrows"]');
 
   circularScroll.scrollToProject();
   setTimeout(() => {
@@ -34,8 +38,6 @@ const toggleSliderAndNavigation = (currentSlider, time) => {
         sl.classList.toggle('slide-hidden');
       }
     });
-
-    arrows.forEach(el => el.classList.toggle('slider__arrows-visible'));
   },  time);
 
   sliderNavigation.forEach(el => el.classList.toggle('slider-clicker-left-active'));

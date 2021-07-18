@@ -73,4 +73,8 @@
   &-invisible {
     visibility: hidden;
   }
+
+  &.active .slide--item {
+    cursor: pointer;
+  }
 }
