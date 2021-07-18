@@ -1,6 +1,7 @@
 @import 'mixins';
 @import 'slider';
 @import 'contact';
+@import 'intro';
 
 $circle-radius: 150vh;
 
@@ -75,9 +76,9 @@ body {
 
   transition: transform 0.4s ease-in-out;
 
-  &-hidden {
-   transform: translateY(-250%);
-  }
+  //&-hidden {
+  // transform: translateY(-250%);
+  //}
 }
 
 .logo-wrapper {
@@ -89,22 +90,6 @@ body {
   margin-top: 2.7vw;
 }
 
-.intro__logo {
-
-  @include size('height', false, 38.2);
-
-  text-align: center;
-  z-index: 1;
-  left:0;
-  right: 0;
-  margin-top: 2.7vw;
-  position: absolute;
-
-  img {
-    height: 100%;
-
-  }
-}
 .slide {
   min-height: 100vh;
   min-width: 100vw;
@@ -134,7 +119,6 @@ body {
 }
 
 .slider {
-
   &__arrows {
     @include size('bottom', false, 46);
     @include size('height', false, 20);

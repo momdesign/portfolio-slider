@@ -4,7 +4,7 @@ import CircularScroll from './circular';
 import Slider from './slider';
 import { closeContacts, openContacts } from './contact';
 import { initIntroAnimation } from './introAnimation'
-import { toggleDescriptionClasses } from './ toggleDescriptionClasses'
+import { toggleDescriptionClasses } from './toggleDescriptionClasses'
 
 export const circularScroll = new CircularScroll();
 

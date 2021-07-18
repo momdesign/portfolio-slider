@@ -21,6 +21,7 @@
 
   &__name {
     @include size('line-height', false, 34);
+    @include size('max-width', 180, 180);
 
     opacity: 1;
 
