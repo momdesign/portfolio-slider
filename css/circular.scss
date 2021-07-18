@@ -145,7 +145,7 @@ body {
 
   &-clicker-left, &-clicker-right {
     position: absolute;
-    top:0;
+    top:50%;
     width: 50vw;
     height: 80vh;
     visibility: hidden;
@@ -164,4 +164,15 @@ body {
     cursor:  url('/img/right-arrow-big.svg'), auto;
     right: 0;
   }
+}
+
+.button-unstyled {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  text-align: left;
 }

@@ -85,7 +85,7 @@ class Slider {
 
   onSliderToggle(time, isOpen) {
     const [next] = this.getNextPrev();
-    isOpen ? gsap.to(next, {xPercent: 95, delay: time , duration: 0.8}) : gsap.to(next, {xPercent: 105, delay: time, duration: 0.5});
+    isOpen ? gsap.to(next, {xPercent: 95, delay: time, duration: 0.8 }) : gsap.to(next, { xPercent: 105, delay: time, duration: 0.5 });
   }
 
   goToNextSlide() {

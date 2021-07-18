@@ -1,10 +1,11 @@
 import CircularScroll from './circular';
 import Slider from './slider';
 import { closeContacts, openContacts } from './contact';
-import { initIntroAnimation } from './introAnimation'
+import IntroAnimation from './introAnimation'
 import { toggleDescriptionClasses } from './toggleDescriptionClasses'
 
 export const circularScroll = new CircularScroll();
+const intro = new IntroAnimation(() => circularScroll.startScrolling());
 
 const dqs = document.querySelector.bind(document);
 const dqsa = document.querySelectorAll.bind(document);
@@ -16,16 +17,7 @@ const header = dqs('[data-animate="header"]');
 let isDetailsClose = true;
 let slidersArr = [];
 
-initIntroAnimation(() => circularScroll.startScrolling());
-
-sliders.forEach((s, i) => {
-  s.addEventListener('click', e => {
-    if (isDetailsClose && !!e.target.closest('.slide.active')) {
-      circularScroll.scrollToProject(i);
-    }
-  });
-  slidersArr.push(new Slider(i));
-});
+intro.init();
 
 const toggleSliderAndNavigation = (currentSlider, time) => {
   const slides = currentSlider.querySelectorAll('.slide');
@@ -63,7 +55,7 @@ const handleDetails = () => {
     info.innerHTML = !isDetailsClose ? circularScroll.activeProject.description : circularScroll.activeProject.info;
   }, 200);
 
-  copyBtn.setAttribute('data-copy', circularScroll.copyLink);
+  // copyBtn.setAttribute('data-copy', circularScroll.copyLink);
 };
 
 const onEscapePress = (e) => {
@@ -75,6 +67,22 @@ const escapeEventHandler = () => {
     ? window.addEventListener('keydown', onEscapePress)
     : window.removeEventListener('keydown', onEscapePress)
 };
+
+sliders.forEach((s, i) => {
+  s.addEventListener('click', e => {
+    if (!intro.isIntroStarted) {
+      intro.start().then(() => {
+        handleDetails();
+      });
+    } else {
+      if (isDetailsClose && !!e.target.closest('.slide.active')) {
+        circularScroll.scrollToProject(i);
+        handleDetails();
+      }
+    }
+  });
+  slidersArr.push(new Slider(i));
+});
 
 details.addEventListener('click', handleDetails);
 

@@ -91,11 +91,13 @@ class CircularScroll {
 
     this.isCentered = true;
 
+    this.activeProject = i === 0 || i ? this.getProjects()[i] : this.activeProject;
+
     if (i || i === 0) {
       if (this.activeProject.index === this.projects.length - 1 && i === 0) {
         this.y = this.y - (this.totalScroll + + this.singleProjectYDuration / 2 - this.position) / this.speed;
       } else {
-        const distance = (this.position - this.getProjects()[i].pos) / this.speed;
+        const distance = (this.position - this.activeProject.pos) / this.speed;
         this.y = this.y + distance;
       }
     } else {

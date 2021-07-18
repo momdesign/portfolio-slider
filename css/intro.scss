@@ -29,7 +29,13 @@
     justify-content: center;
     left: 0;
     right: 0;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    transition: margin-top 0.2s ease;
+
+    &--top {
+      margin-top: -10.4vw;
+    }
   }
 
   &__letter {
