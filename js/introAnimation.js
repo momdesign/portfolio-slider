@@ -15,13 +15,19 @@ class IntroAnimation {
     this.isIntroStarted = false;
     this.tl = gsap.timeline({ paused: true })
       .from(this.sliders[0], { yPercent: 70, duration: 1.5, delay: 0.2, ease:Power2.easeInOut });
-    this.tlLogo = gsap.timeline({paused: true})
-      .to(this.introLogo, {
-        scale: 0.25,
-        y: - window.innerHeight / 2 + this.introLogo.clientHeight * 0.25 / 2 + window.innerWidth * 0.027,
-        duration: 1.5,
-        ease: Power2.easeInOut
-      });
+    this.tlLogo = gsap.timeline({defaults:{ease:Power2.easeInOut}, paused: true})
+      .to('svg', {
+        scale: 0.3,
+        duration: 0.3,
+        y: - window.innerHeight * 0.47,
+      }, 0)
+      .fromTo('svg [id="M2"], svg [id="O"], svg [id="E"], svg [id="S"], svg [id="I"], svg [id="G"], svg [id="N"]', {
+        opacity: 1}, {opacity: 0, duration: 0.1}, 0.13)
+      .fromTo('svg [id="N-small"], svg [id="Y"], svg [id="C"]', {
+        opacity: 0}, {opacity: 1, duration: 0.15}, 0.12)
+      .to('svg [id="M"]', {xPercent: "+165", duration: 0.15}, 0.12)
+      .to('svg [id="D"]', {xPercent: "-40", duration: 0.15}, 0.12)
+
   }
 
   static getTouches(evt) {
@@ -59,7 +65,8 @@ class IntroAnimation {
   start() {
     this.isIntroStarted = true;
 
-    this.introLogo.classList.add('intro__letters--short');
+    //this.introLogo.classList.add('intro__letters--short');
+    this.tlLogo.timeScale(0.3)
     this.tlLogo.play();
     return this.tl.play().then( () => {
       this.onAfterPlayed();

@@ -1,21 +1,30 @@
+import gsap, {Power2} from 'gsap';
+
 const dqs = document.querySelector.bind(document);
 
 export const toggleDescriptionClasses = (time, isDetailsClose) => {
   const name = dqs('[data-more="name"]');
-  // const copyBtn = dqs('[data-animate="copy"]');
   const moreDetailsBtn = dqs('[data-animate="info"]');
   const header = dqs('[data-animate="header"]');
   const logo = dqs('[data-animate="intro-logo"]');
 
-  // copyBtn.classList.toggle('more__copy-visible');
-  logo.classList.toggle('intro__letters--top');
-  moreDetailsBtn.classList.toggle('more__icon-info-visible');
+  const nameTimeline = gsap.timeline()
+    .set(name, {maxWidth: "100vw"}, 0)
+    .to(name, {xPercent: "-200", duration:0.3}, 0)
+    .set(name, {x: window.innerWidth / 1.47, y: - window.innerHeight * 0.87 - name.clientHeight}, ">")
+    .to(name, {y: - window.innerHeight * 0.87 + name.clientHeight, duration: 1}, ">")
+    .to(name, {opacity:1, duration: 0.1}, "<")
+    .to(logo, {opacity:0, duration: 0.3}, "<")
 
-  setTimeout(() => {
-    header.classList.toggle('more__header-visible');
-  }, time + 200);
+
+  const showDetailsBtn = gsap.set(moreDetailsBtn, {opacity: 1})
+
+
+  const hideName = gsap.to(name, {opacity:0, duration: 0.1, paused: true})
+
+
 
   !isDetailsClose
-    ? name.classList.toggle('more__name-hidden')
-    : setTimeout(() => name.classList.toggle('more__name-hidden'), 250);
+    ? (hideName.play())
+    : (hideName.delay(0.25), hideName.play())
 }
