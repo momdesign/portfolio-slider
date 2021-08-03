@@ -1,19 +1,10 @@
 @import 'mixins';
 
 .more {
-  @include size('margin-left', false, 65);
-  @include size('margin-bottom', false, 43);
-  @include size('max-width', false, 279);
-
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-
-
   &__name, &__header {
     @include size('font-size', 20, 42);
     @include size('letter-spacing', -0.4, -1.23);
+    @include size('max-width', 0, 158);
     @include trade-gothic;
 
     transition: opacity 0.2s linear;
@@ -50,7 +41,7 @@
   }
 
   &__info {
-    @include size('margin-top', false, 15);
+    @include size('margin-top', false, 6);
     @include size('max-width', false, 192);
   }
 
