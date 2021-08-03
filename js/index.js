@@ -49,6 +49,8 @@ const handleDetails = () => {
   toggleDescriptionClasses(delayTime, isDetailsClose);
   circularScroll.toggleScrollingHandler(!isDetailsClose);
 
+  header.innerHTML = circularScroll.activeProject.name;
+
   setTimeout(() => {
     info.innerHTML = !isDetailsClose ? circularScroll.activeProject.description : circularScroll.activeProject.info;
   }, 200);
