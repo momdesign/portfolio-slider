@@ -11,7 +11,7 @@ html, body {
   width: 100%;
   background-color: #ffffff;
   position: relative;
-  transition: background-color 0.7s linear;
+  transition: background-color 1s linear;
   display: none;
 
   @include for-desktop {
@@ -26,12 +26,14 @@ html, body {
   &__item {
     width: 20%;
     overflow: hidden;
+    position: relative;
 
     &--wrapper {
+      position: absolute;
+      top: 100%;
       height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      width: 100%;
+      transition: transform 0.6s ease-in-out;
     }
     img {
       position: absolute;
@@ -46,9 +48,15 @@ html, body {
   &__img--mask {
     position: relative;
     height: 100%;
-    transform: translateY(100%);
+
     overflow: hidden;
-    transition: transform 0.6s ease-in-out;
+
+  }
+  &__info--wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
