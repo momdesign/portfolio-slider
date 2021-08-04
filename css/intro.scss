@@ -1,0 +1,31 @@
+@import 'mixins';
+
+.intro {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+
+  &__logo {
+    height: 10.4vw;
+    z-index: 1;
+    left:0;
+    right: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    max-width: 85vw;
+    margin: 0 auto;
+
+    &--nyc {
+      @include size('font-size', 0, 42);
+      @include size('line-height', 0, 34);
+      @include size('letter-spacing', 0, -0.7);
+      @include trade-gothic;
+
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+}
