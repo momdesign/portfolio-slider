@@ -81,7 +81,6 @@ class IntroAnimation {
     window.addEventListener('wheel', e => {
       if (this.isIntroStarted || e.deltaY < 0) return;
       this.start();
-      cb();
     });
     window.addEventListener('touchstart', this.onTouchStart);
     window.addEventListener('touchmove', this.onTouchMove);
