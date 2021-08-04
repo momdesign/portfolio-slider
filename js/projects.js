@@ -1,3 +1,5 @@
+import gsap from 'gsap'
+
 import IntroAnimation from "./introAnimation";
 
 const introAnimation = new IntroAnimation();
@@ -6,9 +8,9 @@ introAnimation.init(() => goToNextProject);
 
 const projectsBlock = document.querySelector('.projects');
 const projectItems = document.querySelectorAll('.projects__item');
-let index = 0;
+const btn = document.querySelector('#btn')
+let index = -1;
 let hasScrolled = false;
-
 
 const projects =  [...document.querySelectorAll('[data-project]')].map(el => ({
    name: el.getAttribute('data-project-name'),
@@ -19,41 +21,53 @@ const projects =  [...document.querySelectorAll('[data-project]')].map(el => ({
    color: el.getAttribute('data-project-color'),
  }));
 
-const setProjectInfo = () => {
+const setProjectInfo = (i) => {
+  // console.log(i)
   const name = document.querySelector('[data-more="name"]');
   const info = document.querySelector('[data-more="info"]');
   const service = document.querySelector('[data-more="service"]');
   const year = document.querySelector('[data-more="year"]');
+  const color = projects[i]?.color;
 
-    projectsBlock.style.backgroundColor = projects[index].color;
+  setTimeout(() => {
+    projectsBlock.style.backgroundColor = color;
+  }, i ? 1000 : 0);
 
-  name.innerHTML = projects[index].name
-  info.innerHTML = projects[index].info
-  service.innerHTML = projects[index].service
-  year.innerHTML = projects[index].year
+  name.innerHTML = projects[i].name
+  info.innerHTML = projects[i].info
+  service.innerHTML = projects[i].service
+  year.innerHTML = projects[i].year
 };
 
 const goToNextProject = () => {
-  if(index < projects.length){
-    setProjectInfo();
+  projectItems.forEach(el => {
+      const nextProjectItem = el.querySelector(`[data-project-index="${index + 1}"]`);
+      const prevProjectItem = el.querySelector(`[data-project-index="${index}"]`);
 
+      if(nextProjectItem) {
+          gsap.to(nextProjectItem, {yPercent: -100, delay : index ? 1.5 : 0.5});
+      }
+      if(prevProjectItem) {
+          gsap.to(prevProjectItem, {yPercent: -200});
+      }
+    })
+    index++;
+    setProjectInfo(index);
+};
+
+const goToPrevProject = () => {
     projectItems.forEach(el => {
       const currProjectItem = el.querySelector(`[data-project-index="${index}"]`);
       const prevProjectItem = el.querySelector(`[data-project-index="${index - 1}"]`);
-
-      if(prevProjectItem) {
-        setTimeout(() => {
-          prevProjectItem.style.transform = 'translateY(-200%)';
-        },   1000 * Math.random());
-      }
       if(currProjectItem) {
-        setTimeout(() => {
-          currProjectItem.style.transform = 'translateY(-100%)';
-        }, (index ? 1500 : 1000) + 1000 * Math.random());
+        gsap.to(currProjectItem, {yPercent: 0});
+      }
+      if(prevProjectItem) {
+        gsap.to(prevProjectItem, {yPercent: -100, delay: 1.5});
       }
     });
-    index++;
-  }
+    index--;
+    setProjectInfo(index);
 };
 
 function throttle(cb, interval) {
@@ -68,7 +82,14 @@ function throttle(cb, interval) {
 }
 
 const goToNextProjectThrottle = throttle( () => goToNextProject() ,  3000);
+const goToPrevProjectThrottle = throttle( () => goToPrevProject() ,  3000);
 
-window.addEventListener('wheel', () => {
-  goToNextProjectThrottle();
+window.addEventListener('wheel', (e) => {
+  console.log(index);
+  if ( e.deltaY > 0 && index < projects.length - 1) {
+    goToNextProjectThrottle();
+  }
+  if( e.deltaY < 0 && index > 0) {
+    goToPrevProjectThrottle();
+  }
 });
