@@ -1,0 +1,29 @@
+@import 'mixins';
+@import 'variables';
+
+html, body {
+  height: 100%;
+}
+
+
+.project {
+  @include for-desktop {
+    display: none;
+  }
+  &__wrapper{
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__name {
+    @include trade-gothic;
+    @include size('margin-top', 15, false);
+    @include size('font-size', 42, false);
+    @include size('line-height', 34, false);
+    @include size('letter-spacing', -0.7, false);
+
+    text-align: center;
+  }
+}

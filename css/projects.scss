@@ -1,4 +1,6 @@
 @import 'mixins';
+@import 'variables';
+@import 'project-page';
 
 html, body {
   height: 100%;
@@ -58,10 +60,56 @@ html, body {
   }
 }
 
-.projects--mobile {
+.mobile {
   @include for-desktop {
     display: none;
   }
+  &__wrapper{
+    @include size('max-width', 328, false);
 
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__header {
+    @include size('margin-top', 15, false);
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__footer {
+  }
+  &__details {
+    @include size('font-size', 10, false);
+    @include size('letter-spacing', 0.4, false);
+    @include size('line-height', 14, false);
+
+    font-family: $font-primary;
+  }
+  &__line {
+    @include size('margin-bottom', 15, false);
+
+    border-width: 1px;
+    border-color: #000000;
+    border-bottom: none;
+  }
+  &__info-icon {
+    @include size('width', 20, false);
+    @include size('height', 20, false);
+    @include size('margin-bottom', 36, false);
+
+    object-fit: contain;
+  }
+  &__item {
+    overflow: hidden;
+    img {
+      @include size('height', 234, false);
+
+      display: block;
+      width: 100%;
+    }
+  }
 }
