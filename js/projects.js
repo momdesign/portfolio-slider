@@ -44,7 +44,7 @@ const goToNextProject = () => {
       const prevProjectItem = el.querySelector(`[data-project-index="${index}"]`);
 
       if(nextProjectItem) {
-          gsap.to(nextProjectItem, {yPercent: -100, delay : index ? 1.5 : 0.5});
+        gsap.to(nextProjectItem, {yPercent: -100, delay : index >= 0 ? 1.5 : 0.7});
       }
       if(prevProjectItem) {
           gsap.to(prevProjectItem, {yPercent: -200});
