@@ -77,7 +77,7 @@ class IntroAnimation {
     this.projectInfoAnimation.play();
   }
 
-  init(cb) {
+  init() {
     window.addEventListener('wheel', e => {
       if (this.isIntroStarted || e.deltaY < 0) return;
       this.start();

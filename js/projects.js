@@ -4,11 +4,11 @@ import IntroAnimation from "./introAnimation";
 
 const introAnimation = new IntroAnimation();
 
-introAnimation.init(() => goToNextProject);
+introAnimation.init();
 
 const projectsBlock = document.querySelector('.projects');
 const projectItems = document.querySelectorAll('.projects__item');
-const btn = document.querySelector('#btn')
+const btn = document.querySelector('#btn');
 let index = -1;
 let hasScrolled = false;
 
@@ -22,7 +22,6 @@ const projects =  [...document.querySelectorAll('[data-project]')].map(el => ({
  }));
 
 const setProjectInfo = (i) => {
-  // console.log(i)
   const name = document.querySelector('[data-more="name"]');
   const info = document.querySelector('[data-more="info"]');
   const service = document.querySelector('[data-more="service"]');
@@ -33,10 +32,10 @@ const setProjectInfo = (i) => {
     projectsBlock.style.backgroundColor = color;
   }, i ? 1000 : 0);
 
-  name.innerHTML = projects[i].name
-  info.innerHTML = projects[i].info
-  service.innerHTML = projects[i].service
-  year.innerHTML = projects[i].year
+  name.innerHTML = projects[i].name;
+  info.innerHTML = projects[i].info;
+  service.innerHTML = projects[i].service;
+  year.innerHTML = projects[i].year;
 };
 
 const goToNextProject = () => {
@@ -50,7 +49,7 @@ const goToNextProject = () => {
       if(prevProjectItem) {
           gsap.to(prevProjectItem, {yPercent: -200});
       }
-    })
+    });
     index++;
     setProjectInfo(index);
 };
@@ -59,6 +58,7 @@ const goToPrevProject = () => {
     projectItems.forEach(el => {
       const currProjectItem = el.querySelector(`[data-project-index="${index}"]`);
       const prevProjectItem = el.querySelector(`[data-project-index="${index - 1}"]`);
+
       if(currProjectItem) {
         gsap.to(currProjectItem, {yPercent: 0});
       }
@@ -85,7 +85,6 @@ const goToNextProjectThrottle = throttle( () => goToNextProject() ,  3000);
 const goToPrevProjectThrottle = throttle( () => goToPrevProject() ,  3000);
 
 window.addEventListener('wheel', (e) => {
-  console.log(index);
   if ( e.deltaY > 0 && index < projects.length - 1) {
     goToNextProjectThrottle();
   }
