@@ -1,6 +1,7 @@
 @import 'mixins';
 @import 'variables';
 @import 'project-page';
+@import 'info-page';
 
 html, body {
   height: 100%;
@@ -79,8 +80,6 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  &__footer {
   }
   &__details {
     @include size('font-size', 10, false);

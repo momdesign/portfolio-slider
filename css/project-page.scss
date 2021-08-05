@@ -10,8 +10,22 @@ html, body {
   @include for-desktop {
     display: none;
   }
-  &__wrapper{
-    height: 100vh;
+  &__sticky {
+    @include size('margin-top', 15, false);
+    @include size('top', 15, false);
+
+    position: sticky;
+  }
+  &__close-icon{
+    @include size('margin-top', 7, false);
+
+    position: absolute;
+    right: 0;
+  }
+  &__wrapper {
+    @include size('max-width', 328, false);
+    @include size('height', 608, false);
+
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -19,11 +33,29 @@ html, body {
   }
   &__name {
     @include trade-gothic;
-    @include size('margin-top', 15, false);
+
     @include size('font-size', 42, false);
     @include size('line-height', 34, false);
     @include size('letter-spacing', -0.7, false);
 
     text-align: center;
+  }
+  &__details {
+    @include size('font-size', 10, false);
+    @include size('letter-spacing', 0.4, false);
+    @include size('line-height', 14, false);
+
+    font-family: $font-primary;
+  }
+  &__link-icon {
+    @include size('margin-top', 27, false);
+    @include size('margin-bottom', 27, false);
+  }
+  &__image {
+    overflow: hidden;
+    img {
+      display: block;
+      width: 100%;
+    }
   }
 }
