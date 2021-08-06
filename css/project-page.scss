@@ -1,26 +1,10 @@
 @import 'mixins';
 @import 'variables';
 
-html, body {
-  height: 100%;
-}
-
 
 .project {
   @include for-desktop {
     display: none;
-  }
-  &__sticky {
-    @include size('margin-top', 15, false);
-    @include size('top', 15, false);
-
-    position: sticky;
-  }
-  &__close-icon{
-    @include size('margin-top', 7, false);
-
-    position: absolute;
-    right: 0;
   }
   &__wrapper {
     @include size('max-width', 328, false);
@@ -28,16 +12,27 @@ html, body {
 
     margin: 0 auto;
     display: flex;
+    justify-content: flex-end;
     flex-direction: column;
-    justify-content: space-between;
+  }
+  &__close-icon{
+    @include size('top', 22, false);
+    @include size('left', 329, false);
+
+    position: fixed;
   }
   &__name {
     @include trade-gothic;
-
+    @include size('top', 15, false);
     @include size('font-size', 42, false);
     @include size('line-height', 34, false);
     @include size('letter-spacing', -0.7, false);
 
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-block;
+    white-space: nowrap;
     text-align: center;
   }
   &__details {
@@ -46,16 +41,17 @@ html, body {
     @include size('line-height', 14, false);
 
     font-family: $font-primary;
+
   }
   &__link-icon {
     @include size('margin-top', 27, false);
     @include size('margin-bottom', 27, false);
+
   }
+
   &__image {
     overflow: hidden;
-    img {
-      display: block;
-      width: 100%;
-    }
+    display: block;
+    width: 100%;
   }
 }
