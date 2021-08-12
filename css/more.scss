@@ -58,6 +58,7 @@
   &__button {
     @include size('width', false, 22);
     @include size('height', false, 22);
+
     border: none;
     outline: none;
     background-color: transparent;

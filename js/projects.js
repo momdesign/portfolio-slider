@@ -1,4 +1,4 @@
-import gsap from 'gsap'
+import gsap, {Power2} from 'gsap'
 
 import IntroAnimation from "./introAnimation";
 
@@ -8,9 +8,9 @@ introAnimation.init();
 
 const projectsBlock = document.querySelector('.projects');
 const projectItems = document.querySelectorAll('.projects__item');
-const btn = document.querySelector('#btn');
 let index = -1;
 let hasScrolled = false;
+let isFistsProjectShown = false;
 
 const projects =  [...document.querySelectorAll('[data-project]')].map(el => ({
    name: el.getAttribute('data-project-name'),
@@ -30,24 +30,24 @@ const setProjectInfo = (i) => {
 
   setTimeout(() => {
     projectsBlock.style.backgroundColor = color;
-  }, i ? 1000 : 0);
+  }, isFistsProjectShown ? 1000 : 0);
 
   name.innerHTML = projects[i].name;
   info.innerHTML = projects[i].info;
   service.innerHTML = projects[i].service;
   year.innerHTML = projects[i].year;
+  isFistsProjectShown = true
 };
 
 const goToNextProject = () => {
-  projectItems.forEach(el => {
+  projectItems.forEach((el , i) => {
       const nextProjectItem = el.querySelector(`[data-project-index="${index + 1}"]`);
-      const prevProjectItem = el.querySelector(`[data-project-index="${index}"]`);
-
-      if(nextProjectItem) {
-        gsap.to(nextProjectItem, {yPercent: -100, delay : index >= 0 ? 1.5 : 0.7});
+      const currProjectItem = el.querySelector(`[data-project-index="${index}"]`);
+    if(nextProjectItem) {
+        gsap.to(nextProjectItem, {yPercent: -100, duration: 1, ease: Power2.easeInOut,  delay : index < 0 ? (i % 3 * 0.4 + 0.7) : i % 3 * 0.4 + 1.2});
       }
-      if(prevProjectItem) {
-          gsap.to(prevProjectItem, {yPercent: -200});
+      if(currProjectItem) {
+        gsap.to(currProjectItem, {yPercent: -200, duration: 0.5, ease: Power2.easeInOut,  delay : i % 3 * 0.4 + 0.3});
       }
     });
     index++;
@@ -55,15 +55,15 @@ const goToNextProject = () => {
 };
 
 const goToPrevProject = () => {
-    projectItems.forEach(el => {
+    projectItems.forEach((el, i) => {
       const currProjectItem = el.querySelector(`[data-project-index="${index}"]`);
       const prevProjectItem = el.querySelector(`[data-project-index="${index - 1}"]`);
 
       if(currProjectItem) {
-        gsap.to(currProjectItem, {yPercent: 0});
+        gsap.to(currProjectItem, {yPercent: 0, duration: 0.5, ease: Power2.easeInOut,  delay : i % 3 * 0.4 + 0.3});
       }
       if(prevProjectItem) {
-        gsap.to(prevProjectItem, {yPercent: -100, delay: 1.5});
+        gsap.to(prevProjectItem, {yPercent: -100, duration: 1, ease: Power2.easeInOut,  delay : i % 3 * 0.4 + 1.2});
       }
     });
     index--;

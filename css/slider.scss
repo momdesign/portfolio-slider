@@ -29,7 +29,7 @@
     top: 50%;
     transform: translateY(-50%);
     width: 50vw;
-    height: 70vh;
+    height: 80vh;
     visibility: hidden;
 
     &-active {
@@ -39,11 +39,11 @@
 
   &-clicker-left {
     left: 0;
-    cursor:  url('/img/left-arrow.svg'), auto;
+    cursor:  url('/assets/left-arrow.svg'), auto;
   }
 
   &-clicker-right {
-    cursor:  url('/img/right-arrow.svg'), auto;
+    cursor:  url('/assets/right-arrow.svg'), auto;
     right: 0;
   }
 }
